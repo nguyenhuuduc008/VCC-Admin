@@ -1,0 +1,337 @@
+
+<div class="" id="general">
+    <div class="row">
+        <div class="col-md-12 ">
+            <!-- BEGIN SAMPLE FORM PORTLET-->
+            <div class="portlet light bordered">
+                <div class="portlet-body form">
+                    <form class="form-horizontal" role="form" novalidate ng-submit="saveEdit(generalSettingsForm)" id="generalSettingsForm" name="generalSettingsForm">
+
+                        <div class="portlet-body">
+                            <div class="panel-group accordion" id="setting">
+
+                                <!--Basic Settings-->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#setting" href="#basic"> Basic Settings </a>
+                                        </h4>
+                                    </div>
+                                    <div id="basic" class="panel-collapse in">
+                                        <div class="panel-body" style="height:500px; overflow-y:auto;">
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Admin Email</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-large" ng-model="settings.adminEmail" required placeholder="Admin Email">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.adminEmail.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Admin Web URL</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-large" ng-model="settings.adminURL" required placeholder="Admin Web URL">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.adminURL.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">App Mobile Web URL</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-large" ng-model="settings.appURL" required placeholder="App Mobile Web URL">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.appURL.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Progressive Web URL</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-large" ng-model="settings.webURL" required placeholder="Web URL">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.webURL.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Allow SignUp</label>
+                                                <div class="col-md-9">
+                                                    <div class="mt-radio-inline">
+                                                        <label class="mt-checkbox mt-checkbox-outline">
+                                                            <input name="allowSignUp" id="allowSignUp" ng-model="settings.allowSignUp" type="checkbox">
+                                                            <span></span>
+                                                        </label>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Require Login</label>
+                                                <div class="col-md-9">
+                                                    <div class="mt-radio-inline">
+                                                        <label class="mt-checkbox mt-checkbox-outline">
+                                                            <input name="requireLogin" id="requireLogin" ng-model="settings.requireLogin" type="checkbox">
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                    <label class="col-md-3 control-label">Ecommerce</label>
+                                                    <div class="col-md-9">
+                                                        <div class="mt-radio-inline">
+                                                            <label class="mt-checkbox mt-checkbox-outline">
+                                                                <input name="ecom" id="ecom" ng-model="settings.enableEcommerce" type="checkbox">
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Brief Max Char</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-medium" ng-model="settings.briefMaxChar" required placeholder="Brief Max Char">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.briefMaxChar.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Home Page</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-medium" ng-model="settings.homePage" required placeholder="Home Page">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.homePage.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Comments Per Page</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-medium" ng-model="settings.commentsPerPage" required placeholder="Comments Per Page">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.commentsPerPage.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Posts Per Page</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-medium" ng-model="settings.postsPerPage" required placeholder="Posts Per Page">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.postsPerPage.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Feed Image Directory</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-medium" ng-model="settings.feedImageDirectory" required placeholder="Feed Image Directory">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.feedImageDirectory.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Feed Post Max Char</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-medium" ng-model="settings.feedPostMaxChar" required placeholder="Feed Post Max Char">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.feedPostMaxChar.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Membership Application Payment Image Directory</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-medium" ng-model="settings.membershipApplicationPaymentImageDirectory" required placeholder="Membership Application Payment Image Directory">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.membershipApplicationPaymentImageDirectory.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Membership Application Image Directory</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-medium" ng-model="settings.membershipApplicationImageDirectory" required placeholder="Membership Application Image Directory">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.membershipApplicationImageDirectory.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label"> Created on</label>
+                                                <div class="col-md-9">
+                                                    <p class="form-control-static">{{settings.timestampCreated | date : "MM/dd/yyyy H:M:s"}}</p>
+                                                    <!--<input type="text" class="form-control input-medium" ng-model="settings.timestampCreated" required placeholder="Time Stamp Created">-->
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.timestampCreated.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Modified on</label>
+                                                <div class="col-md-9">
+                                                    <p class="form-control-static">{{settings.timestampModified | date : "MM/dd/yyyy H:M:s"}}</p>
+                                                    <!--<input type="text" class="form-control input-medium" ng-model="settings.timestampModified" required placeholder="Time Stamp Modified">-->
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.timestampModified.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--App Settings-->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#setting" href="#collapse_2"> App Settings </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse_2" class="panel-collapse collapse">
+                                        <div class="panel-body" style="overflow-y:auto;">
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">App Name</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-large" ng-model="settings.appName" required placeholder="Enter App Name">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.appName.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">App URL</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-xlarge" ng-model="settings.appURL" required placeholder="Enter App URL">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.appURL.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">App Logo</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-large" ng-model="settings.appLogo" required placeholder="App Logo">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.appLogo.$error.required">* This field is required</label>
+                                                    <span class="help-block">
+                                                        <img src="{{settings.appLogo}}" width="100px">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Android Build Version</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-large" ng-model="settings.androidBuildVersion" required placeholder="Android Build Version">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.androidBuildVersion.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Android Download URL</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-large" ng-model="settings.androidDownloadURL" required placeholder="Android Download URL">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.androidDownloadURL.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">iOS Build Version</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-medium" ng-model="settings.iosBuildVersion" required placeholder="iOS Build Version">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.iosBuildVersion.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">iOS Download URL</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-medium" ng-model="settings.iosDownloadURL" required placeholder="iOS Download URL">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.iosDownloadURL.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">App Update Message</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control" ng-model="settings.appUpdateMessage" required placeholder="Android Download URL">
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.appUpdateMessage.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Navigation Settings-->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#setting" href="#collapse_3"> Navigation Settings </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse_3" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Show Bottom Menu</label>
+                                                <div class="col-md-9">
+                                                    <label class="mt-checkbox mt-checkbox-outline">
+                                                        <input type="checkbox" name="bottomMenu" id="bottomMenu" ng-model="settings.bottomMenu" />
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Top Menu Location</label>
+                                                <div class="col-md-9">
+                                                    <select class="form-control input-large" ng-model="settings.topMenuLocation">
+                                                        <option ng-model="settings.topMenuLocation" value="none">None</option>
+                                                        <option ng-model="settings.topMenuLocation" value="left">Left</option>
+                                                        <option ng-model="settings.topMenuLocation" value="right">Right</option>
+                                                    </select>
+                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.topMenuLocation.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn green">Save Changes</button>
+                                    <button type="button" class="btn default" ng-click="cancelChangeUserRoles()">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- END SAMPLE FORM PORTLET-->
+        </div>
+    </div>
+</div>
+
+
+<!-- /.modal new category -->
+<div class="modal fade bs-modal-lg" id="large" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form class="form-horizontal" role="form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Add Category</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Category Name *</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control input-medium" placeholder="Enter Category Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Unique ID</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control input-medium" placeholder="Unique ID">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Category Parent</label>
+                            <div class="col-md-9">
+                                <select class="form-control input-medium">
+                                    <option>No Parent</option>
+                                    <option>Category Test</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group last">
+                            <label class="col-md-3 control-label padding-bottom-10">Category Description</label>
+                            <div class="col-md-12">
+                                <textarea class="wysihtml5 form-control" rows="40" name="post-text"></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn green">Save & Close</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

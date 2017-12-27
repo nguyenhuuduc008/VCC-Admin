@@ -1,0 +1,71 @@
+<div class="row" id="permission">
+    <div class="col-md-12">
+        <!-- BEGIN PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <!--<i class="icon-social-dribbble font-green"></i>
+                    <span class="caption-subject font-green bold uppercase">Input Masks</span>-->
+                </div>
+                <div class="actions">
+                    <a class="btn btn-circle btn-icon-only blue" href="#/permission/list">
+                        <i class="icon-list"></i>
+                    </a>
+                    <!--<a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                        <i class="icon-wrench"></i>
+                    </a>-->
+
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <!-- BEGIN FORM-->
+                <form ng-submit="permissionVm.create(addPermissionForm)" class="form-horizontal form-bordered" role="form" name="addPermissionForm" novalidate>
+                    <div class="form-body">
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <table class="table table-hover table-light text-center">
+                                <thead>
+                                    <tr class="uppercase">
+                                        <th class="th-title width30"> Permissions Name </th>
+                                        <th class="th-title width10"> Index </th>
+                                        <th ng-repeat="role in permissionVm.roles"> {{role.name}} </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="th-title" ng-show="permissionVm.roles.length > 0" ng-class="{'has-error': (permissionVm.showInvalid && addPermissionForm.permissionName.$error.required) || addPermissionForm.permissionName.$error.pattern}">
+                                            <input type="text" ng-model="permissionVm.model.name" placeholder="Permission Name" class="col-md-10 form-control" name="permissionName" required ng-pattern="permissionVm.nameRegx" maxlength="50" />
+                                            <label class="control-label" ng-show="permissionVm.showInvalid && addPermissionForm.permissionName.$error.required">* This field is required</label>
+                                            <label class="control-label" ng-show="addPermissionForm.permissionName.$error.pattern">* This field is not valid</label>
+                                        </td>
+                                        <td class="th-title" ng-show="permissionVm.roles.length > 0" ng-class="{'has-error': (permissionVm.showInvalid && addPermissionForm.permissionName.$error.pattern)}">
+                                            <input type="text" ng-model="permissionVm.model.index" placeholder="Index Number" class="col-md-10 form-control" name="permissionIndex" required ng-pattern="permissionVm.numberRegx"/>
+                                            <!--<label class="control-label" ng-show="permissionVm.showInvalid && addPermissionForm.permissionIndex.$error.required">* This field is required</label>-->
+                                            <!--<label class="control-label" ng-show="addPermissionForm.permissionIndex.$error.pattern">* This field is not valid</label>-->
+                                        </td>
+                                        <td ng-repeat="role in permissionVm.roles">
+                                            <label class="mt-checkbox mt-checkbox-outline">
+                                                <input type="checkbox" name="tnc" value="{{role.$id}}" />
+                                                <span></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn green">
+                                    <i class="fa fa-check" ng-disabled="addPermissionForm.$invalid"></i> Save
+                                </button>
+                                <button type="button" class="btn default" ng-click="permissionVm.cancel()">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- END FORM-->
+            </div>
+        </div>
+    </div>
+</div>

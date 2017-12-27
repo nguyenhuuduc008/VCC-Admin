@@ -1,0 +1,33 @@
+{
+  "name": "angular-haversine",
+  "description": "A simple AngularJS module for calculating distances between two coordinates.",
+  "version": "0.1.0",
+  "main": [
+    "angular-haversine.js"
+  ],
+  "ignore": [
+    ".gitignore",
+    "bower.json",
+    "karma.conf.js",
+    "package.json",
+    "test",
+    "README.md"
+  ],
+  "dependencies": {
+    "angular": ">=1.2"
+  },
+  "devDependencies": {
+    "angular": ">=1.2",
+    "angular-mocks": "~1.2"
+  },
+  "homepage": "https://github.com/benharold/angular-haversine",
+  "_release": "0.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.1.0",
+    "commit": "248624acf5ce20f5683f26a58083242a3ed38067"
+  },
+  "_source": "https://github.com/benharold/angular-haversine.git",
+  "_target": "^0.1.0",
+  "_originalSource": "angular-haversine"
+}

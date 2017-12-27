@@ -1,0 +1,112 @@
+.auto-complete-div{
+    ul.auto-complete-list{
+        padding: 0;
+        border: 1px solid #e5e5e5;
+        overflow: scroll;
+        max-height: 190px;
+        position: absolute;
+        width: 100%;
+        z-index: 9999;
+        background: white;
+        li{
+            list-style: none;
+            min-height: 30px;
+            padding-left: 12px;
+            vertical-align: middle;
+            padding-top: 5px;
+        }
+        li:first{
+            margin-top: 5px;
+        }
+        li:hover{
+            background-color: #e5e5e5;
+            color: #5b9bd1;
+        }
+    }
+}
+
+.mt-element-card .mt-card-item {
+    outline: none;
+    &.selected {
+        .selected-mask{
+            position: absolute;
+            right: 0;
+            z-index: 14;
+            background-color: #3484ba;
+            width: 30px;
+            height: 30px;
+            padding: 5px;
+
+            &:before {
+                font: normal normal normal 20px/1 FontAwesome;
+                content: "\f00c";
+                display:inline-block;
+                vertical-align: top;
+                line-height: 1em;
+                width: 1em;
+                height:1em;
+                margin-right: 0.3em;
+                text-align: center;
+                color: #fff;
+            }
+        }
+    }
+}
+
+[text-angular] {
+    .ta-editor {
+        padding: 10px;
+        background-color: #FFF;
+        border: 1px solid #EEE;
+        overflow: scroll;
+    }
+    .btn-group {
+        margin-bottom: 5px;
+    }
+    [contenteditable="true"] {
+        min-height: 250px;
+    }
+    textarea{
+        width: 100%;
+    }
+}
+
+ul.apps-container{
+    // border: 1px dashed #ccc;
+    padding-bottom: 10px;
+    li{
+        list-style: none;
+    }
+}
+
+.margin-left-negative-25{
+    margin-left: -25px;
+}
+.map-google{
+   .angular-google-map-container { height: 400px; } 
+}
+.chk-p-text{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.doctor-pic{
+    margin: 0px !important;
+}
+.doctor-pic:before{
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    font-size: 24px;
+}
+
+.action-tools{
+    .badge{
+        display: inline-block;
+        font-family: "Open Sans",sans-serif;
+        font-weight: 600;
+        height: 25px;
+        margin: 0px 5px;
+        padding: 6px 9px;
+    }
+}

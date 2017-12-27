@@ -1,0 +1,63 @@
+<div class="row" id="permission">
+    <div class="col-md-12">
+        <!-- BEGIN BORDERED TABLE PORTLET-->
+        <div class="portlet light portlet-fit bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <div class="col-md-10 no-padding-right">
+                        <select class="bs-select form-control" id="action-list" ng-model="permissionVm.selectAction">
+                            <option>Bulk Actions</option>
+                            <option>Delete</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 no-padding-left">
+                        <button type="button" class="btn green" ng-click="permissionVm.apply('select-permission')">Apply</button>
+                    </div>
+                </div>
+                <div class="actions">
+                    <div class="btn-group btn-group-devided">
+                        <div class="col-md-1">
+                            <a href="#/permission/add" class="btn blue">Add New</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-scrollable table-scrollable-borderless">
+                    <table class="table table-hover table-light text-center">
+                        <thead>
+                            <tr class="uppercase">
+                                <th class="width5">
+                                    <label class="mt-checkbox mt-checkbox-outline">
+                                        <input type="checkbox" id="select-all-permission" ng-click="permissionVm.selectAll('select-all-permission','select-permission')"/>
+                                        <span></span>
+                                    </label>
+                                </th>
+                                <th class="th-title"> Permissions </th>
+                                <th class="th-title"> Index </th>
+                                <th ng-repeat="role in permissionVm.roles"> {{role.name}} </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in permissionVm.items">
+                                <td>
+                                    <label class="mt-checkbox mt-checkbox-outline">
+                                        <input type="checkbox" name="select-permission" value="{{item.$id}}"/>
+                                        <span></span>
+                                    </label>
+                                </td>
+                                <td class="th-title"><a href="#/permission/edit/{{item.$id}}"> {{item.name}} </a></td>
+                                <td class="th-title"><a href="#/permission/edit/{{item.$id}}"> {{item.index}} </a></td>
+                                <td ng-repeat="role in permissionVm.roles">
+                                  <i ng-if="permissionVm.checkRoleOfPermission(role,item.roles)" class="fa fa-check font-green-dark "></i>
+                                  <i ng-if="!permissionVm.checkRoleOfPermission(role,item.roles)" class="fa fa-close font-red"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- END BORDERED TABLE PORTLET-->
+    </div>
+</div>

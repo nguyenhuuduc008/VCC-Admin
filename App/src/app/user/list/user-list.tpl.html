@@ -1,0 +1,98 @@
+﻿<div class="portlet light bordered tasks-widget" id="users">
+    <div class="portlet-title">
+        <div class="caption caption-md">
+            <i class="icon-bar-chart theme-font hide"></i>
+            <span class="caption-subject font-blue-madison">
+                <a href="javascript:;" ng-click="userVm.getAllUsers()">All</a>
+            </span>
+            <span class="caption-helper">{{userVm.allUsers}}</span>
+            <span class="caption-helper">|</span>
+            <span class="caption-subject font-blue-madison">
+                <a href="javascript:;" ng-click="userVm.getAddminUsers()">Administrator</a>
+            </span>
+            <span class="caption-helper">{{userVm.adminUser}}</span>
+        </div>
+        <div class="inputs">
+            <div class="portlet-input input-small input-inline">
+                <div class="input-icon right">
+                    <i class="icon-magnifier"></i>
+                    <input type="text" class="form-control form-control-solid" ng-model="userVm.keyword" placeholder="search..." ng-change="userVm.searchUser(userVm.keyword)">
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="portlet-title">
+        <div class="caption width70 row">
+            <div class="col-md-3 no-padding-right">
+                <select class="bs-select form-control" id="action-list">
+                    <option value="0">Bulk Actions</option>
+                    <option value="delete">Delete</option>
+                    <option value="disable">Disable</option>
+                    <option value="enable">Enable</option>
+                </select>
+            </div>
+            <div class="col-md-1 no-padding-left">
+                <button type="button" class="btn green" ng-click="userVm.applyAction('select-user','action-list')">Apply</button>
+            </div>
+            <div class="col-md-3 no-padding-right">
+                <select id="list-role" class="bs-select form-control">
+                    <option value="0">Assign Role to...</option>
+                    <option ng-repeat="role in userVm.roles" value="{{role.$id}}">{{role.name}}</option>
+                </select>
+            </div>
+            <div class="col-md-1 no-padding-left">
+                <button type="button" class="btn green" ng-click="userVm.changeUserRole('select-user','list-role')">Change</button>
+            </div>
+            <div class="col-md-3 text-center">
+                <a type="button" href="#" ng-click="userVm.addNew()" class="btn blue">Add New</a>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="padding-top-2">
+                <!--<list-paging ng-model="paging" on-change="changePage()"></list-paging>-->
+                <list-paging ng-model="userVm.paging" change-page="userVm.changePage"></list-paging>
+            </div>
+        </div>
+    </div>
+    <div class="table-scrollable table-scrollable-borderless">
+        <table class="table table-hover table-light">
+            <thead class="flip-content">
+                <tr class="uppercase">
+                    <th class="width5">
+                        <label class="mt-checkbox mt-checkbox-outline">
+                            <input type="checkbox" id="select-all-user" ng-click="userVm.selectAllUser('select-all-user','select-user')"/>
+                            <span></span>
+                        </label>
+                    </th>
+                    <th class="width5"> Image </th>
+                    <th class="width25"> Email </th>
+                    <th class="width25"> Full Name </th>
+                    <th class="hidden-sm text-center width15"> Phone </th>
+                    <th class="hidden-sm width25"> Role </th>
+                    <th class="hidden-sm text-center width5"> Status </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in userVm.pagedItems[userVm.paging.currentPage]">
+                    <td>
+                        <label class="mt-checkbox mt-checkbox-outline">
+                            <input type="checkbox" name="select-user" value="{{item.$id}}" class="chk-select-user"/> 
+                            <span></span>
+                        </label>
+                    </td>
+                    <td class="fit">
+                        <p ng-if="item.photoURL ===''" class="img-responsive user-pic" data-letters="{{userVm.dataLetterPic(item)}}" ></p>
+                        <img ng-if="item.photoURL !==''"  ng-src="{{item.photoURL}}" class="user-pic" class="" alt="profile-image"> 
+                    </td>
+                    <td> <a class="primary-link" href="#" ng-click="userVm.edit(item.$id)" style="word-break: break-all;">{{item.email}}</a> </td>
+                    <td> <a class="primary-link" href="#">{{item.firstName + ' ' + item.lastName}}</a></td>
+                    <td class="hidden-sm text-center">{{item.phoneNumber | tel}}</td>
+                    <td class="hidden-sm" ng-bind-html="userVm.deserializeRole(item.userRoles)"></td>
+                    <td class="hidden-sm text-center" ng-if="item.isAuthorized"><i class="fa fa-check font-green-jungle"></i></td>
+                    <td class="hidden-sm text-center" ng-if="!item.isAuthorized"><i class="fa fa-ban font-red"></i></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

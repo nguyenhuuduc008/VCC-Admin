@@ -1,0 +1,31 @@
+#events{
+    .portlet > .portlet-title > .caption, .portlet.light > .portlet-title > .caption > .caption-subject {
+        font-size: 15px!important;
+    }
+    /*.table.table-light > thead > tr > th.green{
+        color: #26C281!important;
+    }*/
+
+    .btn:not(.md-skip) {
+    	border-radius: 5px!important;
+	    padding: 6px 14px 7px 14px!important;
+    }
+    .table .btn{
+    	margin-right: 0px!important;
+    }
+    .btn.default:not(.btn-outline){
+    	background-color: transparent!important;
+    	border-color: transparent!important;
+    }
+    .rate-date-picker {
+    	label.control-label{
+    		display: none!important;
+    	}
+    	div.input-group.date.form_meridian_datetime{
+    		margin-right: 5px!important;
+    	}
+    }
+    .table.table-light > tbody > tr > td{
+    	vertical-align: top!important;
+    }
+}	
