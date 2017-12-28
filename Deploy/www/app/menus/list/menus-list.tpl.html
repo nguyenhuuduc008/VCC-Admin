@@ -1,0 +1,921 @@
+<div id="menus" class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+
+            <div class="portlet-body">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#tab_1_1" data-toggle="tab" ng-click="typePlatform('Mobile'); currentTab = 'Mobile'"> Mobile </a>
+                    </li>
+                    <li >
+                        <a href="#tab_1_2" data-toggle="tab" ng-click="typePlatform('Web'); currentTab = 'Web'"> Web </a>
+                    </li>
+                    <!--<li >
+                        <a href="#tab_1_2" data-toggle="tab" > Manage Locations </a>
+                    </li>-->
+                </ul>
+                <div class="tab-content">
+                    <!--Mobile Tab-->
+                    <div class="tab-pane fade active in" id="tab_1_1">
+
+                        <div class="portlet light padding-bottom-5 margin-bottom-10">
+                            <div class="portlet-title">
+                                <div class="form-horizontal" role="form">
+                                    <div class="form-body">
+                                        <!--<div class="form-group">
+                                            <label class="col-md-3 control-label">Select platform</label>
+                                            <div class="col-md-9">
+                                                <div class="mt-radio-inline">
+                                                    <label class="mt-radio mt-checkbox-outline">
+                                                        <input name="menuOptionPlatform" id="menuOptionMobile" value="Mobile" type="radio" checked ng-click="typePlatform('Mobile')"> Mobile
+                                                        <span></span>
+                                                    </label>
+                                                    <label class="mt-radio mt-checkbox-outline">
+                                                        <input name="menuOptionPlatform" id="menuOptionWeb" value="Web" type="radio" ng-click="typePlatform('Web')"> Web
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                        <form role="form" id="addMenuTypeForm" name="addMenuTypeForm" novalidate>
+                                            <div class="form-group col-md-12" ng-class="{'has-error': (showInvalidAddMenuType && addMenuTypeForm.menuTypeName.$error.required) || addMenuTypeForm.menuTypeName.$error.pattern}">
+                                                <label class="col-md-3 no-padding-right control-label">Menu type name <span class="required-field">*</span></label>
+                                                <div class="col-md-3 no-padding-right">
+                                                    <input type="text" name="menuTypeName" placeholder="Menu type name" class="form-control" required ng-pattern="nameRegx" ng-model="menuTypeName" />
+                                                    <label class="control-label" ng-show="showInvalidAddMenuType && addMenuTypeForm.menuTypeName.$error.required">* This field is required</label>
+                                                    <label class="control-label" ng-show="addMenuTypeForm.menuTypeName.$error.pattern">* This field does not allow special characters</label>
+                                                </div>
+                                                <div class="col-md-3 no-padding-right">
+                                                    <button type="button" class="btn blue" ng-click="addNewMenuType(addMenuTypeForm)">Add New</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Select a menu to edit</label>
+                                            <div class="col-md-3">
+                                                <select class="form-control" name="menuType" ng-model="menuType" ng-change="typeMenu()">
+                                                    <option value="all" disabled>--Select Menu--</option>
+                                                    <option ng-repeat="item in menuTypes" value="{{item.id}}">{{item.name}}</option>
+                                                </select>
+                                            </div>
+                                            <!--<div class="col-md-9" ng-if="platformType == 'Mobile'">
+                                                <div class="mt-radio-inline">
+                                                    <label class="mt-radio mt-checkbox-outline">
+                                                        <input name="menuOptionMobile" id="menuOption1" value="option1" type="radio" checked ng-click="typeMenu('top')"> Top
+                                                        <span></span>
+                                                    </label>
+                                                    <label class="mt-radio mt-checkbox-outline">
+                                                        <input name="menuOptionMobile" id="menuOption2" value="option2" type="radio" ng-click="typeMenu('bottom')"> Bottom
+                                                        <span></span>
+                                                    </label>
+                                                    <label class="mt-radio mt-checkbox-outline">
+                                                        <input name="menuOptionMobile" id="menuOption3" value="option3" type="radio" ng-click="typeMenu('more')"> More
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9" ng-if="platformType == 'Web'">
+                                                <div class="mt-radio-inline">
+                                                    <label class="mt-radio mt-checkbox-outline">
+                                                        <input name="menuOptionWeb" id="menuOption4" value="option1" type="radio" checked ng-click="typeMenu('top')"> Top
+                                                        <span></span>
+                                                    </label>
+                                                    <label class="mt-radio mt-checkbox-outline">
+                                                        <input name="menuOptionWeb" id="menuOption5" value="option2" type="radio" ng-click="typeMenu('bottom')"> Bottom
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>-->
+                                            
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <form class="form-horizontal" role="form" novalidate ng-submit="saveEdit(menusForm)" id="menusForm" name="menusForm">
+                            <div class="row">
+                                <!--Left-->
+                                <div class="col-md-4">
+                                    <div class="portlet-body no-padding-top">
+                                        <div class="panel-group accordion" id="accordion1">
+                                            <!--Pages-->
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">
+                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1"> Pages </a>
+                                                    </h4>
+                                                </div>
+
+                                                <div id="collapse_1" class="panel-collapse in">
+                                                    <div class="panel-body no-padding-bottom no-padding-top">
+                                                        <div class="row">
+                                                            <div class="portlet light padding-15 no-margin-bottom no-padding-bottom">
+
+                                                                <div class="portlet-body">
+                                                                    <ul class="nav nav-tabs">
+                                                                        <li class="active">
+                                                                            <a href="#page_1_1" data-toggle="tab"> Most Recent </a>
+                                                                        </li>
+                                                                        <!--<li>
+                                                                            <a href="#page_1_2" data-toggle="tab"> View All </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#page_1_3" data-toggle="tab"> Search </a>
+                                                                        </li>-->
+                                                                    </ul>
+                                                                    <div class="tab-content bordered">
+
+                                                                        <!--Most Recent-->
+                                                                        <div class="tab-pane fade active in" id="page_1_1">
+                                                                            <div class="portlet-body form">
+                                                                                <form role="form">
+                                                                                    <div class="form-body padding-l-r-15 no-padding-top-bottom page-scroll-300">
+                                                                                        <div class="form-group">
+                                                                                            <div class="mt-checkbox-list">
+                                                                                                <div ng-repeat="page in pages">
+                                                                                                    <label class="mt-checkbox mt-checkbox-outline" ng-if="checkAddedToMenu(page.$id)">
+                                                                                                        {{page.title}}
+                                                                                                        <input type="checkbox" value="{{page.$id}}" name="pagemenu" ng-model="page.selected" />
+                                                                                                        <span></span>
+                                                                                                    </label>
+                                                                                                    
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-actions">
+                                                                                        <!--<a class="default pull-left padding-top-10" id="selectAllPages" ng-click="selectAll('selectAllPages', 'pagemenu')">Select All</a>-->
+                                                                                        <button type="button" class="btn blue pull-right" ng-click="addPagesToMenu()">Add to Menu</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--View All-->
+                                                                        <div class="tab-pane fade" id="page_1_2">
+                                                                            <div class="portlet-body form">
+                                                                                <form role="form">
+                                                                                    <div class="form-body padding-l-r-15 no-padding-top-bottom page-scroll-300">
+                                                                                        <div class="form-group">
+                                                                                            <div class="mt-checkbox-list">
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    Home
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    FAQ
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    News
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    About Us
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    Contact Us
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    Our Services
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-actions">
+                                                                                        <!--<a class="default pull-left padding-top-10">Select All</a>-->
+                                                                                        <button type="submit" class="btn blue pull-right">Add to Menu</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--Search-->
+                                                                        <div class="tab-pane fade" id="page_1_3">
+                                                                            <div class="portlet-body form">
+                                                                                <form role="form">
+                                                                                    <div class="form-body padding-15">
+                                                                                        <div class="form-group row">
+                                                                                            <div class="col-md-12">
+                                                                                                <input type="text" class="form-control spinner" placeholder="">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-actions">
+                                                                                        <!--<a class="default pull-left padding-top-10">Select All</a>-->
+                                                                                        <button type="submit" class="btn blue pull-right">Add to Menu</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!--Static Pages-->
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">
+                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_2"> Static Pages </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapse_2" class="panel-collapse collapse">
+                                                    <div class="panel-body no-padding-bottom no-padding-top">
+                                                        <div class="row">
+                                                            <div class="portlet light padding-15 no-margin-bottom no-padding-bottom">
+                                                                <div class="portlet-body">
+                                                                    <ul class="nav nav-tabs">
+                                                                        <li class="active">
+                                                                            <a href="#page_1_1" data-toggle="tab"> Most Recent </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <div class="tab-content bordered">
+                                                                        <!--Most Recent-->
+                                                                        <div class="tab-pane fade active in" id="page_1_1">
+                                                                            <div class="portlet-body form">
+                                                                                <form role="form">
+                                                                                    <div class="form-body padding-l-r-15 no-padding-top-bottom page-scroll-300">
+                                                                                        <div class="form-group">
+                                                                                            <div class="mt-checkbox-list">
+                                                                                                <div ng-repeat="page in staticPages">
+                                                                                                    <label class="mt-checkbox mt-checkbox-outline" ng-if="checkAddedToMenu(page.link)">
+                                                                                                        {{page.text}}
+                                                                                                        <input type="checkbox" value="{{page.link}}" name="link" ng-model="page.selected" />
+                                                                                                        <span></span>
+                                                                                                    </label>
+                                                                                                    
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-actions">
+                                                                                        <!--<a class="default pull-left padding-top-10">Select All</a>-->
+                                                                                        <button type="button" class="btn blue pull-right" ng-click="addStaticPagesToMenu()">Add to Menu</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--View All-->
+                                                                        <div class="tab-pane fade" id="page_1_2">
+                                                                            <div class="portlet-body form">
+                                                                                <form role="form">
+                                                                                    <div class="form-body padding-l-r-15 no-padding-top-bottom page-scroll-300">
+                                                                                        <div class="form-group">
+                                                                                            <div class="mt-checkbox-list">
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    Home
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    FAQ
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    News
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    About Us
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    Contact Us
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    Our Services
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-actions">
+                                                                                        <!--<a class="default pull-left padding-top-10">Select All</a>-->
+                                                                                        <button type="submit" class="btn blue pull-right">Add to Menu</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--Search-->
+                                                                        <div class="tab-pane fade" id="page_1_3">
+                                                                            <div class="portlet-body form">
+                                                                                <form role="form">
+                                                                                    <div class="form-body padding-15">
+                                                                                        <div class="form-group row">
+                                                                                            <div class="col-md-12">
+                                                                                                <input type="text" class="form-control spinner" placeholder="">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-actions">
+                                                                                        <!--<a class="default pull-left padding-top-10">Select All</a>-->
+                                                                                        <button type="submit" class="btn blue pull-right">Add to Menu</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Posts-->
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">
+                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_3"> Posts </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapse_3" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="portlet light padding-15 no-margin-bottom no-padding-bottom">
+
+                                                                <div class="portlet-body">
+                                                                    <ul class="nav nav-tabs">
+                                                                        <li class="active">
+                                                                            <a href="#post_1_1" data-toggle="tab"> Most Recent </a>
+                                                                        </li>
+                                                                        <!--<li>
+                                                                            <a href="#post_1_2" data-toggle="tab"> View All </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#post_1_3" data-toggle="tab"> Search </a>
+                                                                        </li>-->
+                                                                    </ul>
+                                                                    <div class="tab-content bordered">
+
+                                                                        <!--Most Recent-->
+                                                                        <div class="tab-pane fade active in" id="post_1_1">
+                                                                            <div class="portlet-body form">
+                                                                                <form role="form">
+                                                                                    <div class="form-body padding-l-r-15 no-padding-top-bottom page-scroll-300">
+                                                                                        <div class="form-group">
+                                                                                            <div class="mt-checkbox-list">
+                                                                                                <!--<label class="mt-checkbox mt-checkbox-outline" ng-repeat="post in posts">
+                                                                                                    {{post.title}}
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>-->
+                                                                                                <div ng-repeat="post in posts">
+                                                                                                    <label class="mt-checkbox mt-checkbox-outline" ng-if="checkAddedToMenu(post.$id)">
+                                                                                                        {{post.title}}
+                                                                                                        <input type="checkbox" value="{{post.$id}}" name="test" ng-model="post.selected" />
+                                                                                                        <span></span>
+                                                                                                    </label>
+                                                                                                    
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-actions">
+                                                                                        <!--<a class="default pull-left padding-top-10">Select All</a>-->
+                                                                                        <button type="button" class="btn blue pull-right" ng-click="addPostsToMenu()">Add to Menu</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--View All-->
+                                                                        <div class="tab-pane fade" id="post_1_2">
+                                                                            <div class="portlet-body form">
+                                                                                <form role="form">
+                                                                                    <div class="form-body padding-l-r-15 no-padding-top-bottom page-scroll-300">
+                                                                                        <div class="form-group">
+                                                                                            <div class="mt-checkbox-list">
+                                                                                                <!--Paging-->
+                                                                                                <div class="text-center">
+                                                                                                    <span class="padding-l-r-5"><a href=""><i class="fa fa-angle-double-left"></i></a></span>
+                                                                                                    <span class="padding-l-r-5"><a href="">1</a></span>
+                                                                                                    <span class="padding-l-r-5"><a href="">2</a></span>
+                                                                                                    <span class="padding-l-r-5"><a href=""><i class="fa fa-angle-double-right "></i></a></span>
+                                                                                                </div>
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    Post 1
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    Post 11
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    Post 12
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    Post 10
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    Post 2
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    Post 3
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    Post 4
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    Post 5
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                                                    Post 6
+                                                                                                    <input type="checkbox" value="1" name="test" />
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <!--Paging-->
+                                                                                                <div class="text-center">
+                                                                                                    <span class="padding-l-r-5"><a href=""><i class="fa fa-angle-double-left"></i></a></span>
+                                                                                                    <span class="padding-l-r-5"><a href="">1</a></span>
+                                                                                                    <span class="padding-l-r-5"><a href="">2</a></span>
+                                                                                                    <span class="padding-l-r-5"><a href=""><i class="fa fa-angle-double-right "></i></a></span>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-actions">
+                                                                                        <!--<a class="default pull-left padding-top-10">Select All</a>-->
+                                                                                        <button type="submit" class="btn blue pull-right">Add to Menu</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--Search-->
+                                                                        <div class="tab-pane fade" id="post_1_3">
+                                                                            <div class="portlet-body form">
+                                                                                <form role="form">
+                                                                                    <div class="form-body padding-15">
+                                                                                        <div class="form-group row">
+                                                                                            <div class="col-md-12">
+                                                                                                <input type="text" class="form-control spinner" placeholder="">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-actions">
+                                                                                        <!--<a class="default pull-left padding-top-10">Select All</a>-->
+                                                                                        <button type="submit" class="btn blue pull-right">Add to Menu</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--Custom Links-->
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">
+                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_4"> Custom Links </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapse_4" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="portlet light padding-15 no-margin-bottom no-padding-bottom">
+
+                                                                <div class="portlet-body">
+                                                                    <!--Custom Link-->
+                                                                    <div class="portlet-body form">
+                                                                        <form class="form-horizontal" role="form" name="addCustomLinksForm">
+                                                                            <div class="form-body no-padding">
+                                                                                <div class="form-group" ng-class="{'has-error': (showInvalidAddCustomLinksForm && addCustomLinksForm.customlink.$error.required)}">
+                                                                                    <label class="col-md-3 no-padding-left control-label">URL <span class="required-field">*</span></label>
+                                                                                    <div class="col-md-9">
+                                                                                        <input type="text" name="customlink" class="form-control spinner" placeholder="http://" ng-model="customLinkModel.url" required>
+                                                                                        <label class="control-label" ng-show="showInvalidAddCustomLinksForm && addMenuTypeForm.customlink.$error.required">* This field is required</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="col-md-3 no-padding-left control-label">Link Text</label>
+                                                                                    <div class="col-md-9">
+                                                                                        <input type="text" class="form-control spinner" placeholder="" ng-model="customLinkModel.LinkText">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-actions">
+                                                                                <button type="button" class="btn blue pull-right" ng-click="addCustomLinkToMenu(addCustomLinksForm)">Add to Menu</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Right-->
+                                <div class="col-md-8">
+                                    <div class="portlet box default ">
+                                        <div class="portlet-title">
+                                            <div class="caption col-md-8">
+                                                <div class="form-body no-padding">
+                                                    <div class="form-group row">
+                                                        <label class="col-md-4 control-label font-14 text-left">Menu Name</label>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control input-large" ng-model="menus.name" required placeholder="Menu Name">
+                                                            <label class="control-label" ng-show="showInvalid && menusForm.name.$error.required">* This field is required</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label font-14 text-left">Show Icons</label>
+                                                        <div class="col-md-8">
+                                                            <div class="mt-radio-inline">
+                                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                                    <input name="showIcons" id="showIcons" ng-model="menus.showIcons" type="checkbox">
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="tools">
+                                                <button type="submit" class="btn blue pull-right">Save Menu</button>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-6 font-13 font-dark"> Created on: <b>{{menus.timestampCreated | date : "MM/dd/yyyy H:M:s"}}</b></label>
+                                                <label class="control-label col-md-6 font-13 font-dark"> Modified on: <b>{{menus.timestampModified | date : "MM/dd/yyyy H:M:s"}}</b></label>
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body form bordered">
+                                            <div class="form-body">
+                                                <h4 class="bold">Menu Structure</h4>
+                                                <label>Drag each item into the order you prefer. Click the arrow on the right of the item to reveal additional configuration options.</label>
+                                                
+                                                <div class="portlet-body margin-left-15 margin-left-negative-25">
+                                                    <div class="panel-group accordion" id="navigation">
+                                                        <tg-dynamic-directive ng-model="menus" tg-dynamic-directive-view="getView">
+                                                        </tg-dynamic-directive>
+                                                    </div>
+                                                </div>
+                                                
+                                                <script type="text/ng-template" id="nestable_item.html">
+                                                    <div>
+                                                        <ul class="apps-container" ui-sortable="sortableOptions" ng-model="ngModelItem.items">
+                                                            <li class="innerCont" ng-repeat="innerItem in ngModelItem.items">
+                                                                <div class="panel panel-default innerCont">
+                                                                <div class="panel-heading">
+                                                                    <div class="panel-title ">
+                                                                        <div class="row ">
+                                                                            <div class=" col-md-6 text-left">
+                                                                                <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#navigation" href="#{{replaceCollapseTabId(innerItem.link)}}"> {{innerItem.text}} </a>
+                                                                            </div>
+                                                                            <div class=" col-md-6 text-right font-14 font-italic">
+                                                                                <label class="control-label margin-right-20"> {{innerItem.type}} link</label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div id="{{replaceCollapseTabId(innerItem.link)}}" class="panel-collapse collapse ">
+                                                                    <div class="panel-body accordion-toggle">
+                                                                        <div class="form-group">
+                                                                            <label class="col-md-3 control-label">Navigation Label</label>
+                                                                            <div class="col-md-9">
+                                                                                <input type="text" class="form-control" ng-model="innerItem.text" required placeholder="Navigation Label">
+                                                                                <label class="control-label" ng-show="showInvalid && generalSettingsForm.innerItem.text.$error.required">* This field is required</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="col-md-3 control-label">Store ID</label>
+                                                                            <div class="col-md-9">
+                                                                                <input type="text" class="form-control" ng-model="innerItem.param.storeId" required placeholder="Store ID">
+                                                                                <label class="control-label" ng-show="showInvalid && generalSettingsForm.innerItem.param.storeId.$error.required">* This field is required</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="col-md-3 control-label">URL</label>
+                                                                            <div class="col-md-9">
+                                                                                <input type="text" class="form-control" ng-model="innerItem.link" required placeholder="URL">
+                                                                                <label class="control-label" ng-show="showInvalid && generalSettingsForm.innerItem.link.$error.required">* This field is required</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="col-md-3 control-label">Icon</label>
+                                                                            <div class="col-md-9">
+                                                                                <input class="form-control input-inline input-medium" ng-model="innerItem.icon" required placeholder="Icon" type="text">
+                                                                                <label class="control-label" ng-show="showInvalid && generalSettingsForm.innerItem.icon.$error.required">* This field is required</label>
+                                                                                <span class="help-inline" style="vertical-align: bottom;"> <i class="fa fa-{{innerItem.icon}} font-22"></i> </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group text-right">
+                                                                            <div class="col-md-12 text-right">
+                                                                                <button type="button" class="btn btn-sm red" ng-click="deleteMenu(innerItem)"> <i class="fa fa-remove"></i> Remove</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <tg-dynamic-directive ng-model="innerItem" tg-dynamic-directive-view="getView">
+                                                                </tg-dynamic-directive>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </script>
+                                                
+                                                <!--Menu-->
+                                                <!--<div class="portlet-body margin-left-15">
+                                                    <div class="panel-group accordion" id="navigation" ui-sortable="sortableOptions" ng-model="menus.items">
+                                                        <div class="panel panel-default" ng-repeat="item in menus.items track by $index">
+                                                            <div class="panel-heading">
+                                                                <div class="panel-title ">
+                                                                    <div class="row ">
+                                                                        <div class=" col-md-6 text-left">
+                                                                            <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#navigation" href="#{{replaceCollapseTabId(item.link)}}"> {{item.text}} </a>
+                                                                        </div>
+                                                                        <div class=" col-md-6 text-right font-14 font-italic">
+                                                                            <label class="control-label margin-right-20"> {{item.type}} link</label>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <div id="{{replaceCollapseTabId(item.link)}}" class="panel-collapse collapse ">
+                                                                <div class="panel-body accordion-toggle">
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-3 control-label">Navigation Label</label>
+                                                                        <div class="col-md-9">
+                                                                            <input type="text" class="form-control" ng-model="item.text" required placeholder="Navigation Label">
+                                                                            <label class="control-label" ng-show="showInvalid && generalSettingsForm.item.text.$error.required">* This field is required</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-3 control-label">Store ID</label>
+                                                                        <div class="col-md-9">
+                                                                            <input type="text" class="form-control" ng-model="item.param.storeId" required placeholder="Store ID">
+                                                                            <label class="control-label" ng-show="showInvalid && generalSettingsForm.item.param.storeId.$error.required">* This field is required</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-3 control-label">URL</label>
+                                                                        <div class="col-md-9">
+                                                                            <input type="text" class="form-control" ng-model="item.link" required placeholder="URL">
+                                                                            <label class="control-label" ng-show="showInvalid && generalSettingsForm.item.link.$error.required">* This field is required</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-3 control-label">Icon</label>
+                                                                        <div class="col-md-9">
+                                                                            <input class="form-control input-inline input-medium" ng-model="item.icon" required placeholder="Icon" type="text">
+                                                                            <label class="control-label" ng-show="showInvalid && generalSettingsForm.item.icon.$error.required">* This field is required</label>
+                                                                            <span class="help-inline" style="vertical-align: bottom;"> <i class="fa fa-{{item.icon}} font-22"></i> </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-12 control-label text-right">
+                                                                            <button type="button" class="btn btn-sm red" ng-click="deleteMenu(item)"> <i class="fa fa-remove"></i> Remove</button>
+                                                                        </label>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
+                                                <!--ENd Menu-->
+
+
+                                                <!--Menu More-->
+                                                <div ng-class="{'hidden': settings.sectionMenu != 'more'}">
+                                                    
+                                                    <div class="portlet-body">
+                                                        <div ng-repeat="section in menus.sections">
+                                                            <div class="row">
+                                                                <div class="form-group col-md-12">
+                                                                    <label>Section</label>
+                                                                    <input type="text" class="form-control input-large" ng-model="section.name" required placeholder="Menu Name">
+                                                                    <label class="control-label" ng-show="showInvalid && menusForm.section.name.$error.required">* This field is required</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="panel-group accordion margin-left-20" id="navigation" ui-sortable="sortableOptions" ng-model="section.items">
+                                                                <div class="panel panel-default" ng-repeat="item in section.items">
+                                                                    <div class="panel-heading">
+                                                                        <div class="panel-title ">
+                                                                            <div class="row ">
+                                                                                <div class=" col-md-6 text-left">
+                                                                                    <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#navigation" href="#{{replaceCollapseTabId(item.link)}}"> {{item.text}} </a>
+                                                                                </div>
+                                                                                <div class=" col-md-6 text-right font-14 font-italic">
+                                                                                    <label class="control-label margin-right-20"> {{item.type}} link</label>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="{{replaceCollapseTabId(item.link)}}" class="panel-collapse collapse ">
+                                                                        <div class="panel-body accordion-toggle">
+                                                                            <div class="form-group">
+                                                                                <label class="col-md-3 control-label">Navigation Label</label>
+                                                                                <div class="col-md-9">
+                                                                                    <input type="text" class="form-control" ng-model="item.text" required placeholder="Navigation Label">
+                                                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.item.text.$error.required">* This field is required</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="col-md-3 control-label">Store ID</label>
+                                                                                <div class="col-md-9">
+                                                                                    <input type="text" class="form-control" ng-model="item.param.storeId" required placeholder="Store ID">
+                                                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.item.param.storeId.$error.required">* This field is required</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="col-md-3 control-label">URL</label>
+                                                                                <div class="col-md-9">
+                                                                                    <input type="text" class="form-control" ng-model="item.link" required placeholder="URL">
+                                                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.item.link.$error.required">* This field is required</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="col-md-3 control-label">Icon</label>
+                                                                                <div class="col-md-9">
+                                                                                    <input class="form-control input-inline input-medium" ng-model="item.icon" required placeholder="Icon" type="text">
+                                                                                    <label class="control-label" ng-show="showInvalid && generalSettingsForm.item.icon.$error.required">* This field is required</label>
+                                                                                    <span class="help-inline" style="vertical-align: bottom;"> <i class="fa fa-{{item.icon}} font-22"></i> </span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="col-md-12 control-label text-right">
+                                                                                    <button type="button" class="btn btn-sm red" ng-click="deleteMenu(item)" > <i class="fa fa-remove"></i> Remove</button>
+                                                                                </label>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--ENd Menu More-->
+                                                
+                                                <!--<div>
+                                                    <div id="tree_3" class="tree-demo"> </div>
+                                                    <div class="alert alert-success no-margin margin-top-10"> Note! Opened and selected nodes will be saved in the user's browser, so when returning to the same tree the previous state will be restored. </div>
+                                                </div>-->
+                                            </div>
+                                            <div class="form-actions">
+                                                <button type="button" class="btn default" ng-click="cancel()">Cancel</button>
+                                                <button type="button" class="btn red" ng-click="removeMenu(menus)">Remove Menu</button>
+                                                <button type="submit" class="btn blue pull-right">Save Menu</button>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+                    <!--Web Tab-->
+
+                    <!-- Manage Locations-->
+                    <!--<div class="tab-pane fade" id="tab_1_2">
+
+                        <div class="portlet light no-padding-top">
+                                <div class="portlet-body form">
+                                    <form class="form-horizontal" role="form" novalidate ng-submit="saveEdit(menusForm)" id="menusForm" name="menusForm">
+
+                                        <div class="form-body">
+                                            <div class="form-group text-right">
+                                                <p class="form-control-static">Created time: <b>{{menus.timestampCreated | date : "MM/dd/yyyy H:M:s"}}</b></p><br />
+                                                <p class="form-control-static">Last time modified: <b>{{menus.timestampModified | date : "MM/dd/yyyy H:M:s"}}</b></p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Menu Name</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-large" ng-model="menus.name" required placeholder="Menu Name">
+                                                    <label class="control-label" ng-show="showInvalid && menusForm.name.$error.required">* This field is required</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Show Icons</label>
+                                                <div class="col-md-9">
+                                                    <div class="mt-radio-inline">
+                                                        <label class="mt-checkbox mt-checkbox-outline">
+                                                            <input name="allowSignUp" id="allowSignUp" ng-model="menus.showIcons" type="checkbox">
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div ng-repeat="item in menus.items">
+
+                                                <div class="portlet light row">
+                                                    <div class="portlet-title">
+                                                        <div class="caption">
+                                                            <span class="caption-subject bold uppercase" id="{{item.$id}}">Item {{item.id}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Store ID</label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control input-large" ng-model="item.param.storeId" required placeholder="Store ID">
+                                                        <label class="control-label" ng-show="showInvalid && menusForm.item.param.storeId.$error.required">* This field is required</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Icon</label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control input-large" ng-model="item.icon" required placeholder="Icon">
+                                                        <label class="control-label" ng-show="showInvalid && menusForm.item.icon.$error.required">* This field is required</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Link</label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control input-large" ng-model="item.link" required placeholder="Link">
+                                                        <label class="control-label" ng-show="showInvalid && menusForm.item.link.$error.required">* This field is required</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Title</label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control input-large" ng-model="item.text" required placeholder="Title">
+                                                        <label class="control-label" ng-show="showInvalid && menusForm.item.text.$error.required">* This field is required</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Type</label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control input-large" ng-model="item.type" required placeholder="Type">
+                                                        <label class="control-label" ng-show="showInvalid && menusForm.item.type.$error.required">* This field is required</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-offset-3 col-md-9">
+                                                    <button type="submit" class="btn green">Save Changes</button>
+                                                    <button type="button" class="btn default">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+
+                    </div>-->
+                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

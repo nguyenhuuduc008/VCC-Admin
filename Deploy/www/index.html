@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>VCC Admin</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet">
+    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="lib/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css" />
+    <link href="lib/AngularJS-Toaster/toaster.min.css" rel="stylesheet" type="text/css"/>
+    <link href="lib/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css"/>
+    <link href="lib/dropzone/dist/min/dropzone.min.css" rel="stylesheet" type="text/css"/>
+    <link href="lib/angular-ui-tree/dist/angular-ui-tree.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="css/app.css" />
+    <link href="lib/summernote/dist/summernote.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://mbenford.github.io/ngTagsInput/css/ng-tags-input.min.css" />
+    <!-- inject:css -->
+    <!-- endinject: css -->
+
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+    (function(){
+        emailjs.init("user_CUZTLRBCjn5PHAoNnMGdY");
+    })();
+    </script>
+</head>
+
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-closed-hide-logo page-on-load login" ng-class="{'page-sidebar-closed': settings.layout.pageSidebarClosed}" ng-controller="AppCtrl">
+
+    <div data-ng-include="'app/layout/shell.tpl.html'"></div>
+   
+    <!-- inject:vendorjs -->
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/jquery-migrate/jquery-migrate.min.js"></script>
+    <script src="lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="lib/js-cookie/src/js.cookie.js"></script>
+    <script src="lib/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+    <script src="lib/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="lib/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+    <script src="lib/select2/dist/js/select2.full.min.js"></script>
+    <script src="lib/dropzone/dist/min/dropzone.min.js"></script>
+    <script src="lib/moment/min/moment.min.js"></script>
+    <script src="lib/metronic/theme/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="lib/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+    <script src="lib/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="lib/metronic/theme/assets/pages/scripts/components-date-time-pickers.js"></script>
+    <script src="lib/metronic/theme/assets/global/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+    <script src="lib/metronic/theme/assets/global/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+    <script src="lib/wysihtml5/dist/wysihtml5-0.3.0.min.js"></script>
+    <script src="lib/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.all.js"></script>
+    <script src="lib/metronic/theme/assets/pages/scripts/form-image-crop.js"></script>
+    <script src="lib/metronic/theme/assets/pages/scripts/components-editors.js"></script>
+    <script src="lib/metronic/theme/assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.js"></script>
+    <script src="lib/highcharts/highcharts.js"></script>
+    <script src="lib/highcharts/highcharts-3d.js"></script>
+    <script src="lib/highcharts/highcharts-more.js"></script>
+    <script src="lib/jstree/dist/jstree.min.js"></script>
+    <script src="lib/papaparse/papaparse.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-cache/dist/angular-cache.min.js"></script>
+    <script src="lib/ng-tags-input/ng-tags-input.min.js"></script>
+    <script src="lib/angular-route/angular-route.js"></script>
+    <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="lib/angular-animate/angular-animate.min.js"></script>
+    <script src="lib/angular-touch/angular-touch.min.js"></script>
+    <script src="lib/angular-aria/angular-aria.min.js"></script>
+    <script src="lib/angular-material/angular-material.min.js"></script>
+    <script src="lib/angular-ui-sortable/sortable.min.js"></script>
+    <script src="lib/angular-ui-tree/dist/angular-ui-tree.min.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="lib/angular-ui-select2/src/select2.js"></script>
+    <script src="lib/fabric.js/dist/fabric.min.js"></script>
+    <script src="lib/file-saver/FileSaver.min.js"></script>
+    <script src="lib/hammerjs/hammer.min.js"></script>
+    <script src="lib/simplePagination.js/jquery.simplePagination.js"></script>
+    <script src="lib/spectrum/spectrum.js"></script>
+    <script src="lib/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="lib/oclazyload/dist/ocLazyLoad.min.js"></script>
+    <script src="lib/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="lib/metronic/theme/assets/global/scripts/app.js"></script>
+    <script src="lib/metronic/theme/assets/layouts/layout4/scripts/layout.min.js"></script>
+    <script src="lib/metronic/theme/assets/layouts/global/scripts/quick-sidebar.min.js"></script>
+    <script src="lib/metronic/theme/assets/pages/scripts/components-select2.js"></script>
+    <script src="lib/angular-ui-mask/dist/mask.min.js"></script>
+    <script src="lib/bootstrap-fileinput/bootstrap-fileinput.js"></script>
+    <script src="lib/AngularJS-Toaster/toaster.min.js"></script>
+    <script src="lib/lodash/dist/lodash.min.js"></script>
+    <script src="lib/bootbox/bootbox.js"></script>
+    <script src="lib/ngBootbox/ngBootbox.js"></script>
+    <script src="lib/ngstorage/ngStorage.min.js"></script>
+    <script src="lib/highcharts-ng/dist/highcharts-ng.min.js"></script>
+    <script src="lib/angular-md5/angular-md5.min.js"></script>
+    <script src="lib/clipboard/dist/clipboard.js"></script>
+    <script src="lib/clipboard/dist/clipboard.min.js"></script>
+    <script src="lib/format-as-currency/dist/format-as-currency.js"></script>
+    <script src="lib/elasticsearch/elasticsearch.angular.min.js"></script>
+    <script src="lib/elasticsearch/elasticsearch.jquery.min.js"></script>
+    <script src="lib/elasticsearch/elasticsearch.min.js"></script>
+    <script src="lib/angular-haversine/angular-haversine.js"></script>
+    <script src="lib/angularjs-autocomplete/build/angularjs-autocomplete.debug.js"></script>
+    <script src="lib/angularjs-autocomplete/build/angularjs-autocomplete.js"></script>
+    <script src="lib/angularjs-autocomplete/build/angularjs-autocomplete.min.js"></script>
+    <script src="lib/angular-google-maps/dist/angular-google-maps.min.js"></script>
+    <script src="lib/angular-simple-logger/dist/angular-simple-logger.light.min.js"></script>
+    <script src="lib/textAngular/dist/textAngular-rangy.min.js"></script>
+    <script src="lib/textAngular/dist/textAngular-sanitize.min.js"></script>
+    <script src="lib/textAngular/dist/textAngular.min.js"></script>
+    <script src="lib/tg-dynamic-directive/src/tg.dynamic.directive.js"></script>
+    <script src="lib/ng-dropzone/dist/ng-dropzone.min.js"></script>
+    <script src="lib/jspdf/dist/jspdf.min.js"></script>
+    <script src="lib/summernote/dist/summernote.js"></script>
+    <script src="lib/angular-summernote/dist/angular-summernote.min.js"></script>
+    <script src="lib/angulargrid/angulargrid.min.js"></script>
+    <!-- endinject: vendorjs -->
+    <!-- inject:appjs -->
+    <script src="app/app-options.module.js"></script>
+    <script src="app/app-options.service.js"></script>
+    <script src="app/app.module.js"></script>
+    <script src="app/app.route.js"></script>
+    <script src="app/config.js"></script>
+    <script src="app/core/core.module.js"></script>
+    <script src="app/auth/auth.module.js"></script>
+    <script src="app/auth/login.route.js"></script>
+    <script src="app/dRemote/dRemote.module.js"></script>
+    <script src="app/dRemote/dRemote.route.js"></script>
+    <script src="app/layout/layout.module.js"></script>
+    <script src="app/menus/menus.module.js"></script>
+    <script src="app/menus/menus.route.js"></script>
+    <script src="app/permission/permission.module.js"></script>
+    <script src="app/permission/permission.route.js"></script>
+    <script src="app/role/role.module.js"></script>
+    <script src="app/role/role.route.js"></script>
+    <script src="app/settings/settings.module.js"></script>
+    <script src="app/settings/settings.route.js"></script>
+    <script src="app/view/view.module.js"></script>
+    <script src="app/view/view.route.js"></script>
+    <script src="app/home/home.module.js"></script>
+    <script src="app/home/home.route.js"></script>
+    <script src="app/search/search.module.js"></script>
+    <script src="app/common/utils/utils.module.js"></script>
+    <script src="app/core/elasticSearch.service.js"></script>
+    <script src="app/core/firebaseData.service.js"></script>
+    <script src="app/core/firebaseStorage.service.js"></script>
+    <script src="app/core/history.js"></script>
+    <script src="app/core/overrideOcLazyLoad.js"></script>
+    <script src="app/auth/auth.service.js"></script>
+    <script src="app/auth/login.js"></script>
+    <script src="app/auth/mcm-login.js"></script>
+    <script src="app/common/utils/cacheutil.service.js"></script>
+    <script src="app/common/utils/data-utils.js"></script>
+    <script src="app/common/utils/dropzone-firebase.js"></script>
+    <script src="app/common/utils/uploadfile.service.js"></script>
+    <script src="app/common/utils/utils.service.js"></script>
+    <script src="app/common/directive/card_input/angular_card_input.js"></script>
+    <script src="app/common/directive/autocompleselect2/auto_complete_select.js"></script>
+    <script src="app/common/directive/autocompleselect2/auto_complete_select2.js"></script>
+    <script src="app/common/directive/date_range_report/date_range_report.js"></script>
+    <script src="app/common/directive/dropzone/dropzone.js"></script>
+    <script src="app/common/directive/google_autocomplete/google_ac.js"></script>
+    <script src="app/common/directive/html_compile/dynamic.js"></script>
+    <script src="app/common/directive/onblur/out_side_click.js"></script>
+    <script src="app/common/directive/paging/paging.js"></script>
+    <script src="app/common/directive/password_match/password_match.js"></script>
+    <script src="app/common/directive/phone_fillter/phone_filter.js"></script>
+    <script src="app/common/directive/quantity_limit/quantity_limit.js"></script>
+    <script src="app/common/directive/range_date_picker/ratedatepicker.js"></script>
+    <script src="app/common/directive/single_date_picker/single_date_picker.js"></script>
+    <script src="app/common/directive/time_picker/time_picker.js"></script>
+    <script src="app/common/directive/tree_view/checkboxes.js"></script>
+    <script src="app/common/directive/tree_view/sidebar-categories.js"></script>
+    <script src="app/common/directive/tree_view/sidebar-menus.js"></script>
+    <script src="app/common/directive/tree_view/treeCats.js"></script>
+    <script src="app/common/directive/tree_view/treeCats2.js"></script>
+    <script src="app/common/application.map.js"></script>
+    <script src="app/dRemote/dremote-holder.js"></script>
+    <script src="app/layout/shell.js"></script>
+    <script src="app/layout/directives/layout_directives.js"></script>
+    <script src="app/menus/menus.service.js"></script>
+    <script src="app/menus/list/menus-list.js"></script>
+    <script src="app/home/home.js"></script>
+    <script src="app/home/mail.service.js"></script>
+    <script src="app/permission/permission.service.js"></script>
+    <script src="app/permission/add_edit/add.js"></script>
+    <script src="app/permission/add_edit/edit.js"></script>
+    <script src="app/permission/list/permission-list.js"></script>
+    <script src="app/role/role.service.js"></script>
+    <script src="app/role/list/role-list.js"></script>
+    <script src="app/search/search.service.js"></script>
+    <script src="app/settings/settings.service.js"></script>
+    <script src="app/settings/analytics/analytics.js"></script>
+    <script src="app/settings/general/general.js"></script>
+    <script src="app/settings/media/media.js"></script>
+    <script src="app/settings/payment/payment.js"></script>
+    <!-- endinject: apjs -->
+</body>
+
+</html>
+<!--<script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyDSPZy_RzNkdDcgvdWi_O76TVbWjypv4i4"></script>-->
+<script src="https://maps.googleapis.com/maps/api/js?l&key=AIzaSyBkAqJwy0yJMFYmVIPZm0WZIJ5LUavmcr4"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>

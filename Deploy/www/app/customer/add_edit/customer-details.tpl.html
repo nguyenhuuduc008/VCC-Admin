@@ -1,0 +1,337 @@
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PROFILE SIDEBAR -->
+        <div class="profile-sidebar">
+            <!-- PORTLET MAIN -->
+            <div class="portlet light profile-sidebar-portlet bordered" ng-if="isEdit">
+                <!-- SIDEBAR USERPIC -->
+                <div class="profile-userpic text-center">
+                    <p class="img-responsive" data-letters="{{customerDetailVm.dataLetterPic}}" ></p>
+                </div>
+                <!-- END SIDEBAR USERPIC -->
+                <!-- SIDEBAR USER TITLE -->
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">{{customerDetailVm.customer.firstName}} {{customerDetailVm.customer.lastName}}</div>
+                </div>
+                <!-- END SIDEBAR USER TITLE -->
+                <!-- SIDEBAR MENU -->
+                <div class="profile-usermenu">
+                    <ul class="nav padding-10">
+                        <li>
+                            <span class="mem-pro" ng-if="customerDetailVm.customer.lastOrderDate !== ''">
+                                <i class="fa fa-archive"></i> Last Order: <span class="bold">{{customerDetailVm.customer.lastOrderDate | date: 'MM/dd/yyyy @ h:mm a' }}</span>
+                            </span>
+                        </li>
+                        <li>
+                            <span class="mem-pro" ng-if="customerDetailVm.customer.lastLoginDate !== ''">
+                                <i class="icon-user"></i> Last Login: <span class="bold">{{customerDetailVm.customer.lastLoginDate | date: 'MM/dd/yyyy @ h:mm a'}}</span>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END MENU -->
+            </div>
+            <!-- END PORTLET MAIN -->
+            <!-- PORTLET MAIN -->
+            <!-- <div class="portlet light bordered">
+                <div class="row list-separated profile-stat">
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <div class="uppercase profile-stat-title"> 37 </div>
+                        <div class="uppercase profile-stat-text"> Projects </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <div class="uppercase profile-stat-title"> 51 </div>
+                        <div class="uppercase profile-stat-text"> Tasks </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <div class="uppercase profile-stat-title"> 61 </div>
+                        <div class="uppercase profile-stat-text"> Uploads </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="profile-desc-title">About Marcus Doe</h4>
+                    <span class="profile-desc-text"> Lorem ipsum dolor sit amet diam nonummy nibh dolore. </span>
+                    <div class="margin-top-20 profile-desc-link">
+                        <i class="fa fa-globe"></i>
+                        <a href="#">www.happyshopper.com</a>
+                    </div>
+                    <div class="margin-top-20 profile-desc-link">
+                        <i class="fa fa-twitter"></i>
+                        <a href="#">@happyshopper</a>
+                    </div>
+                    <div class="margin-top-20 profile-desc-link">
+                        <i class="fa fa-facebook"></i>
+                        <a href="#">happyshopper</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- END PORTLET MAIN -->
+        </div>
+        <!-- END BEGIN PROFILE SIDEBAR -->
+        <!-- BEGIN PROFILE CONTENT -->
+        <div class="profile-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light bordered">
+                        <div class="portlet-title">
+                            <div class="caption col-md-12 text-right action-tools">
+                                <a href="#/customer/list"  class="btn btn-circle grey-mint" title="Back">Back</a>
+                            </div>
+                        </div>
+            
+                        <div class="portlet-title tabbable-line">
+                            <div class="caption caption-md">
+                                <i class="icon-globe theme-font hide"></i>
+                                <span class="caption-subject font-blue-madison bold uppercase">Customer Infomation</span>
+                            </div>
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a href="#tab_1_1" data-toggle="tab" ng-click="customerDetailVm.initPage()">Customer Info</a>
+                                </li>
+                                <!--<li>
+                                    <a href="#tab_1_2" data-toggle="tab" ng-click="customerDetailVm.initPage()">Customer Orders</a>
+                                </li>-->
+                            </ul>
+                        </div>
+                        <div class="portlet-body form">
+                            <div class="tab-content">
+                                <!-- PERSONAL INFO TAB -->
+                                <div class="tab-pane active row" id="tab_1_1">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <a href="javascript:;" class="btn blue text-right" ng-if="isEdit" ng-click="customerDetailVm.resetPassword()" style="float: right;"> Reset Password </a>
+                                        </div>
+                                    </div>
+                                    <form role="form" id="customerForm" name="customerForm" novalidate ng-submit="customerDetailVm.saveEdit(customerForm)" >
+                                        <div class="form-group col-md-6" ng-class="{'has-error': (customerDetailVm.showInvalid && customerForm.firstname.$error.required) || customerForm.firstname.$error.pattern}">
+                                            <label class="control-label">First Name <span class="required-field">*</span></label>
+                                            <input type="text" name="firstname" placeholder="First Name" class="form-control" required ng-pattern="nameRegx" ng-model="customerDetailVm.customer.firstName"/>
+                                            <!--<label class="control-label" ng-show="customerDetailVm.showInvalid && customerForm.firstname.$error.required">* This field is required</label>-->
+                                            <label class="control-label" ng-show="customerForm.firstname.$error.pattern">* This field does not allow special characters</label>
+                                        </div>
+                                        <div class="form-group col-md-6" ng-class="{'has-error': (customerDetailVm.showInvalid && customerForm.lastname.$error.required) || customerForm.lastname.$error.pattern}">
+                                            <label class="control-label">Last Name <span class="required-field">*</span></label>
+                                            <input type="text" name="lastname" placeholder="Last Name" class="form-control"required ng-pattern="nameRegx" ng-model="customerDetailVm.customer.lastName"/>
+                                            <!--<label class="control-label" ng-show="customerDetailVm.showInvalid && customerForm.lastname.$error.required">* This field is required</label>-->
+                                            <label class="control-label" ng-show="customerForm.lastname.$error.pattern">* This field does not allow special characters</label>
+                                        </div>
+                                        <div class="form-group col-md-6" ng-class="{'has-error': (customerDetailVm.showInvalid && customerForm.email.$error.required) || (customerForm.email.$error.pattern || customerForm.email.$error.email)}">
+                                            <label class="control-label">Email <span class="required-field">*</span></label>
+                                            <input type="email" placeholder="Email" class="form-control" name="email" ng-disabled="isEdit" ng-model="customerDetailVm.customer.email" required  autocapitalize="off" ng-pattern="emailRegx"/>
+                                            <!--<label class="control-label" ng-show="customerDetailVm.showInvalid && customerForm.email.$error.required">* This field is required</label>-->
+                                            <label class="control-label" ng-show="customerForm.email.$error.pattern || customerForm.email.$error.email">* This is not valid</label>
+                                        </div>
+                                        <div class="form-group col-md-6" ng-class="{'has-error': customerForm.phonenumber.$error.server}" ng-if="isEdit">
+                                            <label class="control-label" >Phone Number</label> 
+                                            <input type="tel" uiMaskPlaceholder type="phone" placeholder="Phone Number" class="form-control" name="phonenumber" ng-keyup="customerDetailVm.enalblePhoneForm(customerForm)" ng-model="customerDetailVm.Phone" ui-mask="999-999-9999"/>
+                                            <!--<label class="control-label" ng-show="customerDetailVm.showInvalid && customerForm.phonenumber.$error.required">* This field is required</label>-->
+                                            <br ng-if="customerForm.phonenumber.$error.server">
+                                            <label class="control-label" ng-if="customerForm.phonenumber.$error.server">* {{customerDetailVm.e_msges.phonenumber}}</label>
+                                        </div>
+                                        <div class="form-group col-md-6" ng-if="!isEdit">
+                                            <label class="control-label">Phone Number</label>  
+                                            <input type="tel" uiMaskPlaceholder type="phone" placeholder="Phone Number" class="form-control" name="phonenumber" ng-model="customerDetailVm.customer.phoneNumber" ui-mask="999-999-9999"/>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <div class="portlet light">
+                                                <div class="portlet-title">
+                                                    <div class="caption">
+                                                        Billing Address
+                                                    </div>
+                                                    <div class="tools">
+                                                        <a href="javascript:;" class="collapse"> </a>
+                                                    </div>
+                                                </div>
+                                                <div class="portlet-body line-space-35">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6" ng-class="{'has-error': (customerDetailVm.showInvalid && customerForm.address.$error.required)}">
+                                                            <label class="control-label" >Address <span class="required-field">*</span></label>
+                                                            <input name="address" type="text" placeholder="Address" ng-model="customerDetailVm.customer.billingAddress.address" class="form-control" required/>
+                                                            <!--<label class="control-label" ng-show="customerDetailVm.showInvalid && customerForm.address.$error.required">* This field is required</label>-->
+                                                            <!--<label class="control-label" ng-show="customerForm.address.$error.pattern">* This field does not allow special characters</label>-->
+                                                        </div>
+                                                        <div class="form-group col-md-6" ng-class="{'has-error': (customerDetailVm.showInvalid && customerForm.city.$error.required)}">
+                                                            <label class="control-label" >City <span class="required-field">*</span></label>   
+                                                            <input name="city" type="text" placeholder="City" ng-model="customerDetailVm.customer.billingAddress.city" class="form-control" required/>
+                                                            <!--<label class="control-label" ng-show="customerDetailVm.showInvalid && customerForm.city.$error.required">* This field is required</label>-->
+                                                            <!--<label class="control-label" ng-show="customerForm.city.$error.pattern">* This field does not allow special characters</label>-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6" ng-class="{'has-error': customerDetailVm.showInvalid && customerForm.state.$error.required}">
+                                                            <label class="control-label" >State <span class="required-field">*</span></label>
+                                                            <select name="state" ng-model="customerDetailVm.customer.billingAddress.state" class="form-control" required>
+                                                                <option value="" disabled >Please Choose State</option>
+                                                                <option ng-repeat="state in customerDetailVm.states" value="{{state.value}}" ng-selected="state.value == customerDetailVm.customer.billingAddress.state">{{state.text}}</option>
+                                                            </select>
+                                                            <!--<label class="control-label" ng-show="customerDetailVm.showInvalid && customerForm.state.$error.required">* This field is required</label>-->
+                                                        </div>
+                                                        
+                                                        <div class="form-group col-md-6" ng-class="{'has-error': (customerDetailVm.showInvalid && customerForm.zip.$error.required) || customerForm.zip.$error.pattern}">
+                                                            <label class="control-label" >Zip <span class="required-field">*</span></label>
+                                                            <input name="zip" type="text" placeholder="Zip Code" ng-model="customerDetailVm.customer.billingAddress.zipCode" maxlength="5" ng-pattern="zipcodeRegx"  ng-maxlength="5"  class="form-control" required/>
+                                                            <!--<label class="control-label" ng-show="customerDetailVm.showInvalid && customerForm.zip.$error.required">* This field is required</label>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <div class="portlet light">
+                                                <div class="portlet-title">
+                                                    <div class="caption">
+                                                        Shipping Address
+                                                    </div>
+                                                    <div class="tools">
+                                                        <a href="javascript:;" ng-class="{'expand' : !customerDetailVm.showShippingAddress , 'collapse' : customerDetailVm.showShippingAddress}" ng-click="customerDetailVm.showShippingAddress = !customerDetailVm.showShippingAddress;"> </a>
+                                                    </div>
+                                                </div>
+                                                <div class="portlet-body line-space-35" ng-class="{'hide' : !customerDetailVm.showShippingAddress , 'show' : customerDetailVm.showShippingAddress}">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6" ng-class="{'has-error': (customerDetailVm.showInvalid && customerForm.address_1.$error.required)}">
+                                                            <label class="control-label" >Address</label>
+                                                            <input name="address_1" type="text" placeholder="Address" ng-model="customerDetailVm.customer.shippingAddress.address" class="form-control" />
+                                                            <!--<label class="control-label" ng-show="customerDetailVm.showInvalid && customerForm.address.$error.required">* This field is required</label>-->
+                                                            <!--<label class="control-label" ng-show="customerForm.address.$error.pattern">* This field does not allow special characters</label>-->
+                                                        </div>
+                                                        <div class="form-group col-md-6" ng-class="{'has-error': (customerDetailVm.showInvalid && customerForm.city_1.$error.required)}">
+                                                            <label class="control-label" >City</label>   
+                                                            <input name="city_1" type="text" placeholder="City" ng-model="customerDetailVm.customer.shippingAddress.city" class="form-control" />
+                                                            <!--<label class="control-label" ng-show="customerDetailVm.showInvalid && customerForm.city.$error.required">* This field is required</label>-->
+                                                            <!--<label class="control-label" ng-show="customerForm.city.$error.pattern">* This field does not allow special characters</label>-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6" ng-class="{'has-error': customerDetailVm.showInvalid && customerForm.state_1.$error.required}">
+                                                            <label class="control-label" >State</label>
+                                                            <select name="state_1" ng-model="customerDetailVm.customer.shippingAddress.state" class="form-control" >
+                                                                <option value="" disabled >Please Choose State</option>
+                                                                <option ng-repeat="state in customerDetailVm.states" value="{{state.value}}" ng-selected="state.value == customerDetailVm.customer.shippingAddress.state">{{state.text}}</option>
+                                                            </select>
+                                                            <!--<label class="control-label" ng-show="customerDetailVm.showInvalid && customerForm.state.$error.required">* This field is required</label>-->
+                                                        </div>
+                                                        
+                                                        <div class="form-group col-md-6" ng-class="{'has-error': (customerDetailVm.showInvalid && customerForm.zip_1.$error.required) || customerForm.zip.$error.pattern}">
+                                                            <label class="control-label" >Zip</label>
+                                                            <input name="zip_1" type="text" placeholder="Zip Code" ng-model="customerDetailVm.customer.shippingAddress.zipCode" maxlength="5" ng-pattern="zipcodeRegx"  ng-maxlength="5"  class="form-control" />
+                                                            <!--<label class="control-label" ng-show="customerDetailVm.showInvalid && customerForm.zip.$error.required">* This field is required</label>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12" ng-if="!isEdit">
+                                            <div ng-class="{'has-error': (customerDetailVm.showInvalid && customerForm.password.$error.required) || customerForm.password.$error.pattern}" >
+                                                <label class="control-label">Password <span class="required-field">*</span></label>
+                                                <input name="password" type="password" placeholder="Password" class="form-control " ng-model="customerDetailVm.customer.password" required ng-pattern="passwordRegx"/>
+                                                <!--<label class="control-label" ng-show="customerDetailVm.showInvalid && customerForm.password.$error.required">* This field is required</label>-->
+                                                <label class="control-label" ng-show="customerForm.password.$error.pattern">* Password must be 6-12 characters long and include at least one letter and one number. Passwords are case sensitive.</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12" ng-if="!isEdit">
+                                            <div ng-class="{'has-error': (customerDetailVm.showInvalid && customerForm.confirmPassword.$error.required) || customerForm.confirmPassword.$error.match}" >
+                                                <label class="control-label">Confirm Password <span class="required-field">*</span></label>
+                                                <input name="confirmPassword" type="password" placeholder="Confirm Password" class="form-control " ng-model="customerDetailVm.customer.confirmPassword" required password-match="customerDetailVm.customer.password"/>
+                                                <!--<label class="control-label" ng-show="customerDetailVm.showInvalid && customerForm.password.$error.required">* This field is required</label>-->
+                                                <label class="control-label" ng-show="customerForm.confirmPassword.$error.match">* Passwords do not match.</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <div class="portlet light">
+                                                <div class="portlet-title">
+                                                    <div class="caption">
+                                                        Groups
+                                                    </div>
+                                                    <div class="tools">
+                                                        <a href="javascript:;" ng-class="{'expand' : !customerDetailVm.showGroups , 'collapse' : customerDetailVm.showGroups}" ng-click="customerDetailVm.showGroups = !customerDetailVm.showGroups;"> </a>
+                                                    </div>
+                                                </div>
+                                                <div class="portlet-body line-space-35" ng-class="{'hide' : !customerDetailVm.showGroups , 'show' : customerDetailVm.showGroups}">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-12">
+                                                            <div class="input-group">
+                                                                <select ui-select2 id="groups" name="groups" ng-model="customerDetailVm.objectDatas.groups"  class="form-control" multiple ng-options="item.$id as item.name for item in groups">
+                                                                </select>
+                                                                <!-- <select ui-select2 ng-model="customerDetailVm.objectDatas.groups" ui-select2="{ allowClear: true}" placeholder="Select groups" class="select2-multiple form-control" multiple>
+                                                                    <option ng-repeat="item in groups" value="{{item.$id}}">{{item.name}}</option>
+                                                                </select> -->
+                                                                <!-- <span class="input-group-btn">
+                                                                    <button class="btn blue" type="button" ng-click="addNewRoleGroup()">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </button>
+                                                                </span> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6" ng-if="isEdit">
+                                            <label class="mt-checkbox mt-checkbox-outline" >
+                                                <input id="isActive" type="checkbox" name="isActive" ng-model="customerDetailVm.customer.isActive"/>
+                                                <span></span>
+                                            </label>
+                                            <label for="isActive" >IsActive</label>
+                                        </div>
+                                        <div class="form-group col-md-6" ng-if="isEdit">
+                                            <label class="mt-checkbox mt-checkbox-outline" >
+                                                <input id="isSubscribed" type="checkbox" name="isSubscribed" ng-model="customerDetailVm.isSubscribed" disabled/>
+                                                <span></span>
+                                            </label>
+                                            <label for="isSubscribed" >Email Opt In</label>
+                                        </div>
+                                        <div class=" col-md-12">
+                                            <div class="margin-top-20">
+                                                <button class="btn green" ng-disabled="customerForm.$invalid" type="submit" >
+                                                    Save Change
+                                                </button>
+                                                <button class="btn default " type="button" ng-click="customerDetailVm.cancel()">
+                                                    Cancel
+                                                </button> 
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- END PERSONAL INFO TAB -->
+                                <!-- CUSTOMER ORDERS TAB -->
+                                <!--<div class="tab-pane" id="tab_1_2">                                   
+                                    <form role="form" id="changeProfileImg" name="changeProfileImg" novalidate ng-submit="userDetailVm.changeAvatar(changeProfileImg)">
+                                        <div class="form-group">
+                                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                                    <img ng-src="{{userDetailVm.profileImage}}" alt="" onerror="$(this).attr('src', 'http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image')" style="max-width: 200px; max-height: 150px;"/>
+                                                </div>
+                                                <div class="fileinput-preview fileinput-exists thumbnail" style="line-height: 20px; max-height: 150px; max-width: 200px;"> </div>
+                                                <div style="margin-top: 2px;">
+                                                    <span class="btn default btn-file">
+                                                        <span class="fileinput-new">Select</span>
+                                                        <span class="fileinput-exists"> Change </span>
+                                                        <input type="file" id="file" class="default" name="Thumbnail">
+                                                    </span>
+                                                    <a href="#" class="btn default fileinput-exists" data-dismiss="fileinput"> Remove </a>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="clearfix margin-top-10">
+                                                <span class="label label-danger">NOTE!</span>
+                                                <span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only </span>
+                                            </div>
+                                        </div>
+                                        <div class="margin-top-10">
+                                            <button class="btn green" type="submit" >
+                                                Save Change
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>-->
+                                <!-- END CUSTOMER ORDERS TAB -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PROFILE CONTENT -->
+    </div>
+</div>
+<!-- END PAGE BASE CONTENT

@@ -295,26 +295,13 @@
         "src/app/pixieEditor/objects/ObjectsPanelController.js",
         "src/app/layout/**/*.js",
         "src/app/menus/**/*.js",
-        "src/app/messages/**/*.js",
         "src/app/home/**/*.js",
-        "src/app/membership/**/**/*.js",
-        "src/app/news/**/*.js",
         "src/app/permission/**/*.js",
-        "src/app/registrations/**/*.js",
         "src/app/role/**/*.js",
-        "src/app/settings/**/*.js",
-        "src/app/themes/**/*.js",
-        "src/app/transactions/**/*.js",
-        "src/app/employee/**/*.js",
-        "src/app/venues/**/*.js",
-        "src/app/view/**/*.js",
         "src/app/search/**/*.js",
-        "src/app/recipes/**/*.js",
-        "src/app/onlineCirculars/**/*.js",
-        "src/app/stores/**/*.js",
-        "src/app/weeklyAds/**/*.js",
-        "src/app/onlineCirculars/**/*.js",
-        "src/app/eCommerce/**/*.js",
-        "src/app/notification/**/*.js"
+        "src/app/settings/**/*.js",
+        "src/app/themes/**/*.js"
+
+
     ]
 }

@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "author": "Duc Nguyen",
   "dependencies": {
-    "angulargrid": "^0.6.5"
+    "angulargrid": "^0.6.5",
+    "gulp-uglify": "^2.1.2"
   },
   "devDependencies": {
     "browser-sync": "^2.13.0",

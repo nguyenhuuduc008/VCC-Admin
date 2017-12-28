@@ -1,0 +1,94 @@
+<div id="addCustomer" class="row">
+    <div class="col-md-6 text-left">
+        
+    </div>
+    <div class="col-md-6 text-right">
+        <a class="btn blue margin-top-bottom-5"  href="#/customer/details">Add Customer</a>
+    </div>
+    <div class="col-md-12">
+        <div class="portlet light ">
+            <div class="portlet-title">
+                <div class="row">
+                    <div class="col-sm-12 col-md-8" style="display:inline-flex;">
+                        <date-range-report id="CustomerRangeDateTime" subtract="29" class="margin-top-bottom-5 col-md-5"></date-range-report>
+                        <div class="input-icon right margin-top-bottom-5 margin-left-10">
+                            <i class="icon-magnifier"></i>
+                            <input type="text" class="form-control form-control-solid" ng-model="customerVm.cri.keyword" placeholder="search..." ng-change="customerVm.search(customerVm.cri.keyword)">
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4">
+                        <div class="right margin-top-bottom-5">
+                            <list-paging ng-model="customerVm.paging" change-page="customerVm.changePage" style="float: right;"></list-paging>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="portlet-title">
+                <div class="row">
+                    <div class="col-md-4 no-padding-right">
+                        <div class="form-group margin-top-bottom-5">
+                            <select class="form-control" ng-model="clients">
+                                <option selected value="All">All Client</option>
+                                <option ng-repeat="item in employees" value="{{item.$id}}">{{item.email}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="bs-select form-control">
+                            <option>All Status</option>
+                            <option>Completed/Active</option>
+                            <option>Cancel/Inactive</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 no-padding-right">
+                        <button type="button" class="btn green-haze margin-top-bottom-5 padding-l-r-20 " ng-click="filterItems(true)">Filter</button>
+                        <button type="button" class="btn btn-default margin-top-bottom-5 margin-left-5" ng-click="resetFilter()">Reset Filters</button>                        
+                    </div>
+                </div>
+            </div>-->
+            <div class="portlet-body">
+                <div class="table-scrollable table-scrollable-borderless">
+                    <table class="table table-hover table-light">
+                        <thead>
+                            <tr class="uppercase font-white">
+                                <th class="width20"> Name </th>
+                                <th class="width20"> Email </th>
+                                <th class="width10"> Phone Number </th>
+                                <!-- <th class="width10 text-center"> Docs </th> -->
+                          <!--       <th class="width10 text-center"> Last Paid </th> -->
+                                <th class="width10 text-center"> Last Ordered </th>
+                                <th class="width10 text-center"> Status </th>
+                                <th class="width10 text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in customerVm.pagedItems[customerVm.paging.currentPage]" ng-if="customerVm.pagedItems.length > 0">
+                                <td>
+                                   <a class="primary-link" href="#" ng-click="customerVm.goEdit(item.$id)">{{item.fullName}}</a>
+                                </td>
+                                <td>{{item.email}}</td>
+                                <td>{{item.phoneNumber | tel}}</td>
+                                <!-- <td class="text-center">{{item.docs}}</td> -->
+                           <!--      <td class="text-center">{{item.lastPaid | currency }}</td> -->
+                                <td>{{item.lastOrderDate  | date: 'MM/dd/yyyy @ h:mm a'}}</td>
+                                <td class="text-center">
+                                    <a class="primary-link" href="#" title="{{item.isActive ? 'Active' : 'Un Active'}}" ng-click="customerVm.changeStatus(item)"><i ng-if="item.isActive" class='fa fa-check font-green-jungle'></i><i ng-if="!item.isActive" class='fa fa-ban font-red'></i></a>
+                                </td>
+                                <td align="center" class="action-tools">
+                                    <a href="#/customer/details?id={{item.$id}}" class="padding-5 badge" title="Detail"><i class="fa fa-eye"></i></a>
+                                    <a href="#" class="badge badge-danger" title="{{item.isDeleted ? 'restore' : 'delete'}}" ng-click="customerVm.removeOrRestore(item)">
+                                        <i ng-class="item.isDeleted ? 'fa fa-undo' : 'fa fa-trash'"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                             <tr ng-if="customerVm.pagedItems.length == 0">
+                                <td colspan="7">No records</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

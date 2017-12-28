@@ -1,0 +1,287 @@
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PROFILE SIDEBAR -->
+        <div class="profile-sidebar">
+            <!-- PORTLET MAIN -->
+            <div class="portlet light profile-sidebar-portlet bordered">
+                <!-- SIDEBAR USERPIC -->
+                <div class="profile-userpic text-center">
+                    <p ng-if="userDetailVm.profileImage ===''" class="img-responsive" data-letters="{{userDetailVm.dataLetterPic}}" ></p>
+                    <img ng-if="userDetailVm.profileImage !==''" src="{{userDetailVm.profileImage}}" id="imgProfile" class="img-responsive" alt="profile-image">       
+                </div>
+                <!-- END SIDEBAR USERPIC -->
+                <!-- SIDEBAR USER TITLE -->
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">{{userDetailVm.user.email}}</div>
+                    <!--<div class="profile-usertitle-job">{{userDetailVm.user.occupation}} </div>-->
+                </div>
+                <!-- END SIDEBAR USER TITLE -->
+                <!-- SIDEBAR BUTTONS -->
+                <!-- <div class="profile-userbuttons">
+                    <button type="button" class="btn btn-circle green btn-sm">Follow</button>
+                    <button type="button" class="btn btn-circle red btn-sm">Message</button>
+                </div> -->
+                <!-- END SIDEBAR BUTTONS -->
+                <!-- SIDEBAR MENU -->
+                <div class="profile-usermenu">
+                    <ul class="nav">
+                        <!--<li>
+                            <a href="page_user_profile_1.html">
+                                <i class="icon-home"></i> Overview
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="page_user_profile_1_account.html">
+                                <i class="icon-settings"></i> Account Settings
+                            </a>
+                        </li>
+                        <li>
+                            <a href="page_user_profile_1_help.html">
+                                <i class="icon-info"></i> Help
+                            </a>
+                        </li>-->
+                    </ul>
+                </div>
+                <!-- END MENU -->
+            </div>
+            <!-- END PORTLET MAIN -->
+            <!-- PORTLET MAIN -->
+            <!-- <div class="portlet light bordered">
+                <div class="row list-separated profile-stat">
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <div class="uppercase profile-stat-title"> 37 </div>
+                        <div class="uppercase profile-stat-text"> Projects </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <div class="uppercase profile-stat-title"> 51 </div>
+                        <div class="uppercase profile-stat-text"> Tasks </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <div class="uppercase profile-stat-title"> 61 </div>
+                        <div class="uppercase profile-stat-text"> Uploads </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="profile-desc-title">About Marcus Doe</h4>
+                    <span class="profile-desc-text"> Lorem ipsum dolor sit amet diam nonummy nibh dolore. </span>
+                    <div class="margin-top-20 profile-desc-link">
+                        <i class="fa fa-globe"></i>
+                        <a href="#">www.happyshopper.com</a>
+                    </div>
+                    <div class="margin-top-20 profile-desc-link">
+                        <i class="fa fa-twitter"></i>
+                        <a href="#">@happyshopper</a>
+                    </div>
+                    <div class="margin-top-20 profile-desc-link">
+                        <i class="fa fa-facebook"></i>
+                        <a href="#">happyshopper</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- END PORTLET MAIN -->
+        </div>
+        <!-- END BEGIN PROFILE SIDEBAR -->
+        <!-- BEGIN PROFILE CONTENT -->
+        <div class="profile-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light bordered">
+                        <div class="portlet-title">
+                            <div class="caption col-md-12 text-right action-tools">
+                                <a href="javascript:;" ng-click="historyBack()" class="btn btn-circle grey-mint" title="Back">Back</a>
+                            </div>
+                        </div>
+                        <div class="portlet-title tabbable-line">
+                            <div class="caption caption-md">
+                                <i class="icon-globe theme-font hide"></i>
+                                <span class="caption-subject font-blue-madison bold uppercase">User Profile</span>
+                            </div>
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a href="#tab_1_1" data-toggle="tab" ng-click="userDetailVm.loadData()">User Info</a>
+                                </li>
+                                <!--<li>
+                                    <a href="#tab_1_2" data-toggle="tab" ng-click="loadData()">Change Avatar</a>
+                                </li>-->
+                                <!--<li>
+                                    <a href="#tab_1_3" data-toggle="tab" ng-click="loadData()">Change Password</a>
+                                </li>-->
+                                <li>
+                                    <a href="#tab_1_4" data-toggle="tab" ng-click="userDetailVm.loadData()">User Roles</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="tab-content">
+                                <!-- PERSONAL INFO TAB -->
+                                <div class="tab-pane active row" id="tab_1_1">
+                                     <a href="javascript:;" class="btn blue text-right" ng-click="userDetailVm.resetPassword()" style="float: right;"> Reset Password </a>
+                                    <form role="form" id="editUserForm" name="editUserForm" novalidate ng-submit="userDetailVm.saveEdit(editUserForm)" >
+                                         <div class="form-group col-md-12">
+                                            <label class="control-label">Email</label>
+                                            <input type="email" disabled class="form-control" name="email" ng-model="userDetailVm.user.email" autocapitalize="off"/>
+                                        </div>  
+                                        <div class="form-group col-md-6" ng-class="{'has-error': (userDetailVm.showInvalid && editUserForm.firstname.$error.required) || editUserForm.firstname.$error.pattern}">
+                                            <label class="control-label">First Name <span class="required-field">*</span></label>
+                                            <input type="text" name="firstname" placeholder="First Name" class="form-control" required ng-pattern="nameRegx" ng-model="userDetailVm.user.firstName"/>
+                                            <!--<label class="control-label" ng-show="userDetailVm.showInvalid && editUserForm.firstname.$error.required">* This field is required</label>-->
+                                            <label class="control-label" ng-show="editUserForm.firstname.$error.pattern">* This field does not allow special characters</label>
+                                        </div>
+                                        <div class="form-group col-md-6" ng-class="{'has-error': (userDetailVm.showInvalid && editUserForm.lastname.$error.required) || editUserForm.lastname.$error.pattern}">
+                                            <label class="control-label">Last Name <span class="required-field">*</span></label>
+                                            <input type="text" name="lastname" placeholder="Last Name" class="form-control"required ng-pattern="nameRegx" ng-model="userDetailVm.user.lastName"/>
+                                            <!--<label class="control-label" ng-show="userDetailVm.showInvalid && editUserForm.lastname.$error.required">* This field is required</label>-->
+                                            <label class="control-label" ng-show="editUserForm.lastname.$error.pattern">* This field does not allow special characters</label>
+                                        </div>
+                                        <div class="form-group col-md-12" ng-class="{'has-error': editUserForm.phonenumber.$error.server}">
+                                            <label class="control-label" >Primary Phone</label> 
+                                            <input type="tel" uiMaskPlaceholder type="phone" placeholder="Primary Phone" class="form-control" name="phonenumber" ng-keyup="userDetailVm.EnalblePhoneForm(editUserForm)" ng-model="userDetailVm.Phone" ui-mask="999-999-9999"/>
+                                            <!--<label class="control-label" ng-show="userDetailVm.showInvalid && editUserForm.phonenumber.$error.required">* This field is required</label>-->
+                                            <br ng-if="editUserForm.phonenumber.$error.server">
+                                            <label class="control-label" ng-if="editUserForm.phonenumber.$error.server">* {{userDetailVm.e_msges.phonenumber}}</label>
+                                        </div>
+                                        <div class="form-group col-md-6" ng-class="{'has-error': (userDetailVm.showInvalid && editUserForm.address.$error.required)}">
+                                            <label class="control-label" >Address </label>
+                                            <input name="address" type="text" placeholder="Address" ng-model="userDetailVm.user.address" class="form-control" />
+                                            <!--<label class="control-label" ng-show="userDetailVm.showInvalid && editUserForm.address.$error.required">* This field is required</label>-->
+                                            <label class="control-label" ng-show="editUserForm.address.$error.pattern">* This field does not allow special characters</label>
+                                        </div>
+                                        <div class="form-group col-md-6" ng-class="{'has-error': (userDetailVm.showInvalid && editUserForm.city.$error.required)}">
+                                            <label class="control-label" >City </label>   
+                                            <input name="city" type="text" placeholder="City" ng-model="userDetailVm.user.city" class="form-control" />
+                                            <!--<label class="control-label" ng-show="userDetailVm.showInvalid && editUserForm.city.$error.required">* This field is required</label>-->
+                                            <!--<label class="control-label" ng-show="editUserForm.city.$error.pattern">* This field does not allow special characters</label>-->
+                                        </div>
+                                         <div class="form-group col-md-6" ng-class="{'has-error': userDetailVm.showInvalid && editUserForm.state.$error.required}">
+                                            <label class="control-label" >State </label>
+                                            <select name="state" ng-model="userDetailVm.user.state" class="form-control" >
+                                                <option value="" disabled >Please Choose State</option>
+                                                <option ng-repeat="state in userDetailVm.states" value="{{state.value}}" ng-selected="state.value == userDetailVm.user.state">{{state.text}}</option>
+                                            </select>
+                                            <!--<label class="control-label" ng-show="userDetailVm.showInvalid && editUserForm.state.$error.required">* This field is required</label>-->
+                                        </div>
+                                        <div class="form-group col-md-6" ng-class="{'has-error': (userDetailVm.showInvalid && editUserForm.zipCode.$error.required) || editUserForm.zipCode.$error.pattern}">
+                                            <label class="control-label" >Zip</label>
+                                            <input name="zipCode" type="text" placeholder="Zip Code" ng-model="userDetailVm.user.zipCode" maxlength="5" ng-pattern="zipcodeRegx"  ng-maxlength="5"  class="form-control" />
+                                            <!--<label class="control-label" ng-show="customerDetailVm.showInvalid && customerForm.zip.$error.required">* This field is required</label>-->
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="mt-checkbox mt-checkbox-outline" >
+                                                <input id="isAuthorized" type="checkbox" name="isauthorized" ng-model="userDetailVm.user.isAuthorized"/>
+                                                <span></span>
+                                            </label>
+                                            <label for="isAuthorized" >IsAuthorized</label>
+                                        </div>
+                                        <div class=" col-md-12">
+                                            <div class="margin-top-20">
+                                                <button class="btn green" ng-disabled="editUserForm.$invalid" type="submit" >
+                                                    Save Change
+                                                </button>
+                                                <button class="btn default " type="button" ng-click="userDetailVm.cancel()">
+                                                    Cancel
+                                                </button> 
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- END PERSONAL INFO TAB -->
+                                <!-- CHANGE AVATAR TAB -->
+                                <!--<div class="tab-pane" id="tab_1_2">                                   
+                                    <form role="form" id="changeProfileImg" name="changeProfileImg" novalidate ng-submit="userDetailVm.changeAvatar(changeProfileImg)">
+                                        <div class="form-group">
+                                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                                    <img ng-src="{{userDetailVm.profileImage}}" alt="" onerror="$(this).attr('src', 'http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image')" style="max-width: 200px; max-height: 150px;"/>
+                                                </div>
+                                                <div class="fileinput-preview fileinput-exists thumbnail" style="line-height: 20px; max-height: 150px; max-width: 200px;"> </div>
+                                                <div style="margin-top: 2px;">
+                                                    <span class="btn default btn-file">
+                                                        <span class="fileinput-new">Select</span>
+                                                        <span class="fileinput-exists"> Change </span>
+                                                        <input type="file" id="file" class="default" name="Thumbnail">
+                                                    </span>
+                                                    <a href="#" class="btn default fileinput-exists" data-dismiss="fileinput"> Remove </a>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="clearfix margin-top-10">
+                                                <span class="label label-danger">NOTE!</span>
+                                                <span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only </span>
+                                            </div>
+                                        </div>
+                                        <div class="margin-top-10">
+                                            <button class="btn green" type="submit" >
+                                                Save Change
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>-->
+                                <!-- END CHANGE AVATAR TAB -->
+                                <!-- CHANGE PASSWORD TAB -->
+                                <div class="tab-pane" id="tab_1_3">
+                                     <a href="javascript:;" class="btn green text-right" ng-click="userDetailVm.resetPassword()"> Reset Password </a>
+                                   <!--  <form action="#">
+                                        <div class="form-group">
+                                            <label >Current Password</label>
+                                            <input type="password" class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">New Password</label>
+                                            <input type="password" class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Re-type New Password</label>
+                                            <input type="password" class="form-control" />
+                                        </div>
+                                        <div class="margin-top-10">
+                                            <a href="javascript:;" class="btn green"> Change Password </a>
+                                            <a href="javascript:;" class="btn default"> Cancel </a>
+                                        </div>
+                                    </form> -->
+                                </div>
+                                <!-- END CHANGE PASSWORD TAB -->
+                                <!-- PRIVACY SETTINGS TAB -->
+                                <div class="tab-pane" id="tab_1_4">
+                                    <div class="col-md-12 text-right margin-bottom-10">
+                                        <a href="#" class="btn blue" ng-click="userDetailVm.showPopupAddUserToRole()">Add Role</a>
+                                    </div>
+                                    <form role="form" id="changeUserRoles" name="changeUserRoles" novalidate ng-submit="userDetailVm.saveChangeRole()">
+                                        <table class="table table-light table-hover">            
+                                            <tr ng-repeat="item in userDetailVm.userRoles" ng-if="userDetailVm.userRoles.length > 0">
+                                                <td class="bold">{{item.name}}</td>
+                                                <td>
+                                                    {{item.permissionstxt}}
+                                                </td>
+                                                <td>
+                                                    <a href="#" ng-click="userDetailVm.removeRole($index)">
+                                                        <i class="fa fa-close font-red"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr ng-if="userDetailVm.userRoles.length == 0">
+                                                <td>User does not have any roles assigned</td>
+                                            </tr>
+                                        </table>
+                                        <!--end profile-settings-->
+                                        <div class="margin-top-10">
+                                            <button class="btn green" type="submit" >
+                                                Save Change
+                                            </button>
+                                            <button class="btn default" type="button" ng-click="userDetailVm.cancelChangeUserRoles()">
+                                                Cancel
+                                            </button>
+                                           
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- END PRIVACY SETTINGS TAB -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PROFILE CONTENT -->
+    </div>
+</div>
+<!-- END PAGE BASE CONTENT

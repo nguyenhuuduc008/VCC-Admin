@@ -1,0 +1,53 @@
+
+    <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
+        <!-- Level 1-->
+        <li class="nav-item" ng-repeat="item in rootMenus.children" ng-class="{'open': item.isSelected}">
+            <a href="#" ng-click="goTo(item)" ng-disabled="item.isSelected && (!item.children || item.children.length <= 0)">
+                <i class="{{item.data.icon}}"></i>
+                <span class="title">{{item.name}}</span>
+                <span ng-if="item.children && item.children.length > 0" class="arrow" ng-class="{open: item.isSelected}"></span>
+            </a>
+            <!--<tree-sidebar-menus ng-if="item.children && item.children.length > 0" family="item" style="display: block;" keyword="" go-to="goTo"></tree-sidebar-menus>-->
+            <!-- Level 2-->
+            <ul class="sub-menu" ng-if="item.children && item.children.length > 0" ng-class="{'display': item.isSelected}">
+                <li class="nav-item" ng-repeat="item2 in item.children" ng-class="{'open': item2.isSelected}">
+                    <a href="#" ng-click="goTo(item2)" ng-disabled="item2.isSelected && (!item2.children || item2.children.length <= 0)">
+                        <i class="{{item2.data.icon}}"></i>
+                        <span class="title">{{item2.name}}</span>
+                        <span ng-if="item2.children && item2.children.length > 0" class="arrow" ng-class="{open: item2.isSelected}"></span>
+                    </a>
+                    <!-- Level 3-->
+                    <ul class="sub-menu" ng-if="item2.children && item2.children.length > 0" ng-class="{'display': item2.isSelected}">
+                        <li class="nav-item" ng-repeat="item3 in item2.children" ng-class="{'open': item3.isSelected}">
+                            <a href="#" ng-click="goTo(item3)" ng-disabled="item3.isSelected && (!item3.children || item3.children.length <= 0)">
+                                <i class="{{item3.data.icon}}"></i>
+                                <span class="title">{{item3.name}}</span>
+                                <span ng-if="item3.children && item3.children.length > 0" class="arrow" ng-class="{open: item3.isSelected}"></span>
+                            </a>
+                            <!-- Level 4-->
+                            <ul class="sub-menu" ng-if="item3.children && item3.children.length > 0" ng-class="{'display': item3.isSelected}">
+                                <li class="nav-item" ng-repeat="item4 in item3.children" ng-class="{'open': item4.isSelected}">
+                                    <a href="#" ng-click="goTo(item4)" ng-disabled="item4.isSelected && (!item4.children || item4.children.length <= 0)">
+                                        <i class="{{item4.data.icon}}"></i>
+                                        <span class="title">{{item4.name}}</span>
+                                        <span ng-if="item4.children && item4.children.length > 0" class="arrow" ng-class="{open: item4.isSelected}"></span>
+                                    </a>
+                                    <!-- Level 5-->
+                                    <ul class="sub-menu" ng-if="item4.children && item4.children.length > 0" ng-class="{'display': item4.isSelected}">
+                                        <li class="nav-item" ng-repeat="item5 in item4.children" ng-class="{'open': item5.isSelected}">
+                                            <a href="#" ng-click="goTo(item5)" ng-disabled="item5.isSelected && (!item5.children || item5.children.length <= 0)">
+                                                <i class="{{item5.data.icon}}"></i>
+                                                <span class="title">{{item5.name}}</span>
+                                                <span ng-if="item5.children && item5.children.length > 0" class="arrow" ng-class="{open: item5.isSelected}"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </li>
+    </ul>

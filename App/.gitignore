@@ -1,0 +1,10 @@
+*.sw*
+*~
+*.log
+.DS_Store
+/build/
+/App/build/
+./dist/
+node_modules/
+vendor/
+.idea
