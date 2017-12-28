@@ -94,10 +94,10 @@
             var path = $location.url();
             var appUtils = $injector.get('appUtils'),
                 loaded= appUtils.DRemoteLoaded;
-            if(!loaded){
-                return '/dremote/dremoteholder?link='+encodeURIComponent(path);
-            }
-            return '';
+            // if(!loaded){
+            //     return '/dremote/dremoteholder?link='+encodeURIComponent(path);
+            // }
+            return '/home';
         });
 
         $provide.decorator('taOptions', ['taRegisterTool', '$delegate', 'appUtils', function(taRegisterTool, taOptions, appUtils){
