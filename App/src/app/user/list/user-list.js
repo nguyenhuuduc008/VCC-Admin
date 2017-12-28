@@ -5,7 +5,7 @@
 	.controller('userListCtrl', userListCtrl);
 
     /** @ngInject */
-    function userListCtrl($rootScope,$q, $scope, $state,$timeout,$ngBootbox,appUtils,toaster, currentAuth, authService, userService, roleService,permissionService) {
+    function userListCtrl($rootScope,$q, $scope, $state,$timeout,$ngBootbox,appUtils,toaster, currentAuth, authService, userService, roleService,permissionService, $http) {
         $rootScope.settings.layout.showSmartphone = false;
         $rootScope.settings.layout.showPageHead = true;
         var currentUser = $rootScope.storage.currentUser;
