@@ -88,7 +88,7 @@
                                 // });
 
                                 // $state.go('index');
-                                var dashboardUrl = '/#/home';
+                                var dashboardUrl = '/#/transaction';
                                 // if(window.location.href.indexOf('admin') !== -1){
                                 //     dashboardUrl = '/admin/#/home';
                                 // }

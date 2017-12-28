@@ -1,11 +1,11 @@
 (function() {
 	'use strict';
 
-	angular.module('app.home')
-	.controller('HomeCtrl',HomeCtrl);
+	angular.module('app.register')
+	.controller('RegisterCtrl',RegisterCtrl);
 
 	/** @ngInject */
-	function HomeCtrl($rootScope, $scope, $state, $sce, firebaseDataRef, $firebaseObject){
+	function RegisterCtrl($rootScope, $scope, $state, $sce, firebaseDataRef, $firebaseObject){
         $rootScope.settings.layout.showSmartphone = false;
         $rootScope.settings.layout.showPageHead = true;
         $rootScope.settings.layout.guestPage = true;

@@ -8,12 +8,12 @@
 <!-- END PAGE SPINNER -->
 <!-- BEGIN HEADER -->
 <toaster-container toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-right'}"></toaster-container>
-<div data-ng-include="'app/layout/header.tpl.html'" ng-if="settings.layout.showHeader" data-ng-controller="HeaderController" class="page-header navbar navbar-fixed-top"> </div>
+<div data-ng-include="'app/layout/header.tpl.html'" ng-if="settings.layout.showHeader && !settings.layout.guestPage" data-ng-controller="HeaderController" class="page-header navbar navbar-fixed-top"> </div>
 <!-- END HEADER -->
 <div class="clearfix"> </div>
 
 <!-- BEGIN CONTAINER -->
-<div class="page-container">
+<div class="page-container" ng-if="!settings.layout.guestPage">
     <!-- BEGIN SIDEBAR -->
     
     <div ng-if="settings.layout.showSideBar" data-ng-include="'app/layout/sidebar.tpl.html'" data-ng-controller="SidebarController" class="page-sidebar-wrapper"> </div>
@@ -42,6 +42,24 @@
     </a>-->
     <div data-ng-include="'app/layout/quick-sidebar.tpl.html'" data-ng-controller="QuickSidebarController" class="page-quick-sidebar-wrapper"></div>
     <!-- END QUICK SIDEBAR -->
+</div>
+
+<!-- BEGIN CONTAINER -->
+<div class="page-container no-margin-top" ng-if="settings.layout.guestPage">
+    <!-- BEGIN SIDEBAR -->
+    <!-- END SIDEBAR -->
+    <div class="page-content-wrapper">
+        <div class="page-content no-margin-left no-padding-top">
+            <div class="pull-left col-sm-12 col-xs-12">
+                <!-- BEGIN PAGE HEAD -->
+                <div ng-if="settings.layout.showPageHead" data-ng-include="'app/layout/page-head.tpl.html'" data-ng-controller="PageHeadController" class="page-head"> </div>
+                <!-- END PAGE HEAD -->
+                <!-- BEGIN ACTUAL CONTENT -->
+                <div ui-view class="" ng-strict-di></div>
+                <!-- END ACTUAL CONTENT -->
+            </div>
+        </div>
+    </div>
 </div>
 <!-- END CONTAINER -->
 

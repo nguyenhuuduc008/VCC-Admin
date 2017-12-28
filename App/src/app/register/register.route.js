@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('app.home')
+		.module('app.register')
 		.config(config)
 		.run(appRun);
 	/** @ngInject */	
@@ -11,17 +11,17 @@
 	/** @ngInject */
 	function config($stateProvider) {
 		$stateProvider.state(
-			'index', {
+			'register', {
 				parent: 'root',
-				url: '/home',
-				templateUrl: 'app/home/home.tpl.html',
-				controller: 'HomeCtrl',
+				url: '/register',
+				templateUrl: 'app/register/register.tpl.html',
+				controller: 'RegisterCtrl',
 				controllerAs: 'vm',
 				data: {
-					pageTitle: 'Home',
-					module: 'home',
-					icon: 'fa fa-home',
-					permission: 'Home'
+					pageTitle: 'Register',
+					module: 'register',
+					icon: 'fa fa-users',
+					permission: 'Register'
 				},
 			    resolve: {
 			        // "currentAuth": ["authService", function (authService) {
