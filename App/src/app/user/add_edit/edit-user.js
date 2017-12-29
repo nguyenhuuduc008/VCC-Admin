@@ -7,6 +7,7 @@
 	function editUserCtrl($q,$rootScope,$timeout, $scope, $state,$stateParams,$ngBootbox,$uibModal,appUtils,userService,roleService,permissionService, authService,toaster){
 		$rootScope.settings.layout.showSmartphone = false;
 		$rootScope.settings.layout.showPageHead = true;
+        $rootScope.settings.layout.guestPage = false;
 		if($rootScope.reProcessSideBar){
             $rootScope.reProcessSideBar = false;
         }

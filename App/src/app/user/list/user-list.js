@@ -8,7 +8,12 @@
     function userListCtrl($rootScope,$q, $scope, $state,$timeout,$ngBootbox,appUtils,toaster, currentAuth, authService, userService, roleService,permissionService, $http) {
         $rootScope.settings.layout.showSmartphone = false;
         $rootScope.settings.layout.showPageHead = true;
+        $rootScope.settings.layout.guestPage = false;
         var currentUser = $rootScope.storage.currentUser;
+        if(!currentUser.userRoles || (currentUser.userRoles && currentUser.userRoles.length <= 0)){
+            window.location.href = '/#/home';
+            return;
+        }
         var userVm = this; // jshint ignore:line
         userVm.keyword = '';
         userVm.isAdmin = false;

@@ -57,6 +57,9 @@
                 }
             });
 
+            console.log('-----------userRoles');
+            console.log(userRoles);
+
             userRoleVm.user.userRoles = userRoles;
             var req = userService.updateUser(userRoleVm.user);
             req.then(function(res){

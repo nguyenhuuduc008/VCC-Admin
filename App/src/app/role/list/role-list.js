@@ -8,7 +8,13 @@
     function RoleListCtrl($rootScope, $scope, $state, $q, authService, roleService, toaster, $ngBootbox, appUtils, $stateParams) {
         $rootScope.settings.layout.showSmartphone = false;
         $rootScope.settings.layout.showBreadcrumb = false;
-		var currentUser = authService.getCurrentUser();
+        $rootScope.settings.layout.guestPage = false;
+		// var currentUser = authService.getCurrentUser();
+        var currentUser = $rootScope.storage.currentUser;
+        if(!currentUser.userRoles || (currentUser.userRoles && currentUser.userRoles.length <= 0)){
+            window.location.href = '/#/home';
+            return;
+        }
         
         var roleVm = this;
         roleVm.nameRegx = /^(a-z|A-Z|0-9)*[^!#$%^&*()'"\/\\;:@=+,?\[\]\/]*$/;

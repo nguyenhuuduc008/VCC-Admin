@@ -6,9 +6,16 @@
 
 	/** @ngInject */
 	function PermissionListCtrl($rootScope, $scope, $state,$q, $timeout, authService, permissionService,roleService, $ngBootbox, toaster, appUtils){
-    $rootScope.settings.layout.showSmartphone = false;
-    $rootScope.settings.layout.showBreadcrumb = false;
-    var permissionVm = this;
+        $rootScope.settings.layout.showSmartphone = false;
+        $rootScope.settings.layout.showBreadcrumb = false;
+        $rootScope.settings.layout.guestPage = false;
+            
+        var currentUser = $rootScope.storage.currentUser;
+        if(!currentUser.userRoles || (currentUser.userRoles && currentUser.userRoles.length <= 0)){
+            window.location.href = '/#/home';
+            return;
+        }
+        var permissionVm = this;
         permissionVm.selectAction = 'Bulk Actions';
 
 		permissionVm.items = [];

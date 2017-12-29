@@ -44,7 +44,6 @@
             delete $rootScope.storage.currentUser;
             appUtils.showLoading();
             authService.login(loginVm).then(function(result) {
-                console.log(result);
                 if (result) {
                     authService.getUserInfo(result.uid).then(function(user){
                         var roles = firebaseDataRef.child('roles');

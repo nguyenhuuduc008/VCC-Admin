@@ -8,7 +8,12 @@
 	function TransactionCtrl($rootScope, $scope, $state, $sce, firebaseDataRef, $firebaseObject, appUtils, mailService, toaster){
         $rootScope.settings.layout.showSmartphone = false;
         $rootScope.settings.layout.showPageHead = true;
+        $rootScope.settings.layout.guestPage = false;
 		var currentUser = $rootScope.storage.currentUser;
+        if(!currentUser.userRoles || (currentUser.userRoles && currentUser.userRoles.length <= 0)){
+            window.location.href = '/#/home';
+            return;
+        }
         var appSettings = $rootScope.storage.appSettings;
         var homeId = appSettings.pageHomeId || '-Kor_iCNGYs-AZewc_I3';
         var vm = this;

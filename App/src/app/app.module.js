@@ -170,9 +170,36 @@
     }
     
     /** @ngInject */
-    function AppCtrl($rootScope, $state, $http, toaster,appUtils){
+    function AppCtrl($rootScope, $state, $http, toaster,appUtils, authService, appSettingService){
         if(!$rootScope.storage.currentUser){
-            $state.go('login');
+            // $state.go('login');
+            
+            //Delete cache of current user
+            delete $rootScope.storage.currentUser;
+            appUtils.showLoading();
+            var loginVm = {
+                userName: 'vcc-account@gmail.com',
+                password: 'vcc123456'
+            };
+            authService.login(loginVm).then(function(result) {
+                if (result) {
+                    authService.getUserInfo(result.uid).then(function(user){
+                        user.$id = result.uid;
+                        $rootScope.storage.currentUser = user;
+                        appSettingService.getSettings().then(function(optionRs){
+                            $rootScope.storage.appSettings = optionRs;
+                        });
+                        // window.location.href = '/#/transaction';
+                        $rootScope.settings.layout.showPageHead = false;
+                        $rootScope.settings.layout.showSideBar = true;
+                        $rootScope.settings.layout.showHeader = true;
+                        $rootScope.settings.layout.showSmartphone = true;
+                    }).catch(function(error) {
+                    });
+                }
+            }).catch(function(error) {
+            });
+
         }
         var clipboard = new Clipboard('.btn');
         clipboard.on('success', function(e) {

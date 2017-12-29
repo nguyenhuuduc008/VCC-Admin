@@ -8,6 +8,7 @@
 	function PermissionEditCtrl($rootScope, $scope, $state,$q, permissionService,roleService, $stateParams, toaster, $ngBootbox, authService, appUtils){
     $rootScope.settings.layout.showSmartphone = false;
     $rootScope.settings.layout.showBreadcrumb = true;
+    $rootScope.settings.layout.guestPage = false;
 		$rootScope.breadcrumb = {
             name: 'Permissions',
             link: '#/permissions'

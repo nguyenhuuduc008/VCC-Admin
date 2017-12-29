@@ -51,16 +51,15 @@
             delete $rootScope.storage.currentUser;
             delete $rootScope.storage.roles;
             delete $rootScope.storage.permissions;
-            $state.go('login');
+            // $state.go('login');
+            $location.path($scope.homeUrl);
         };
 
         $scope.goToUserProfile = function(){
             var currentUser = $rootScope.storage.currentUser;
-            // console.log('---------------currentUser');
-            // console.log(currentUser);
             // $location.path('/employee/edit/' + currentUser.$id);
             // var currentUser = $rootScope.storage.currentUser;
-            $location.path('/user/edit/' + currentUser.$id);
+            window.location.href = '/#/user/details?id=' + currentUser.$id;
         };
 
        
@@ -220,15 +219,12 @@
         }
 
         function generateMenus(currentState){
-            // console.log('generateMenus');
             var storageCurrentUser = $rootScope.storage.currentUser;
             var storageRoles = $rootScope.storage.roles;
             var storagePermissions = $rootScope.storage.permissions;
 
             appSettingService.checkNewSettings().then(function(res){
                 var allState = $state.get();
-                // console.log(allState);
-                // console.log(allState.length);
                 if(!res && storageRoles && storageRoles.length > 0 && storagePermissions && storagePermissions.length > 0){
                     setSidebarMenus(allState, storageCurrentUser.userRoles, currentState);
                 }else{
@@ -237,7 +233,9 @@
                     $q.all([DataUtils.firebaseLoadOnce(roleRef), DataUtils.firebaseLoadOnce(permissionRef)]).then(function(rs){
                         $rootScope.storage.roles = DataUtils.toAFArray(rs[0]);
                         $rootScope.storage.permissions = DataUtils.toAFArray(rs[1]);
-                        setSidebarMenus(allState, storageCurrentUser.userRoles, currentState);
+                        if(storageCurrentUser.userRoles){
+                            setSidebarMenus(allState, storageCurrentUser.userRoles, currentState);
+                        }
                     });
                 }
             });

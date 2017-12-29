@@ -54,7 +54,8 @@
 			user.timestampCreated = ts;
             return userRef.child(uid).set(user).then(function(res){
 				//add customer info
-				return createCustomer(user,uid);
+				// return createCustomer(user,uid);
+				return {result: true , data: uid};
             }).catch(function(error) {
 		        return {result: false , errorMsg: error};
 		    });
@@ -108,10 +109,11 @@
 				phoneNumber: user.phoneNumber,
 				address: user.address,
 				city: user.city,
-				state: user.state,
+				state: user.state || '',
 				zipCode: user.zipCode,
 				timestampModified: ts}).then(function(res){
-                return updateCustomer(user,key);
+                // return updateCustomer(user,key);
+				return {result: true , data: key};
             }).catch(function(error) {
 				console.log(error);
 		        return {result: false , errorMsg: error};
@@ -125,9 +127,9 @@
 			return $firebaseObject(customerRef).$loaded().then(function(customer){
 				console.log('customer');
 				console.log(customer);
-				if(customer.$value !== undefined && customer.$value === null){
-					return createCustomer(userInfo, uid);
-				}else{
+				// if(customer.$value !== undefined && customer.$value === null){
+				// 	return createCustomer(userInfo, uid);
+				// }else{
 					customer.firstName= userInfo.firstName;
 					customer.lastName= userInfo.lastName;
 					customer.phoneNumber= userInfo.phoneNumber;
@@ -151,7 +153,7 @@
 						console.log(error);
 						return {result: false , errorMsg: error};
 					});
-				}
+				// }
 			}).catch(function(error) {
 				console.log(error);
 				return {result: false , errorMsg: error};
