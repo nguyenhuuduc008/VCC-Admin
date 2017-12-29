@@ -176,7 +176,6 @@
             
             //Delete cache of current user
             delete $rootScope.storage.currentUser;
-            appUtils.showLoading();
             var loginVm = {
                 userName: 'vcc-account@gmail.com',
                 password: 'vcc123456'

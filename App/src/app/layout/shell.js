@@ -51,8 +51,10 @@
             delete $rootScope.storage.currentUser;
             delete $rootScope.storage.roles;
             delete $rootScope.storage.permissions;
-            // $state.go('login');
+            
+            // $state.go('index', {}, {reload: true});
             $location.path($scope.homeUrl);
+            // window.location.href = $scope.homeUrl;
         };
 
         $scope.goToUserProfile = function(){

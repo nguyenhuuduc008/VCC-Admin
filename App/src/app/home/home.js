@@ -14,16 +14,7 @@
         var homeId = appSettings.pageHomeId || '-Kor_iCNGYs-AZewc_I3';
         var vm = this;
         $scope.data = {};
-        // initPage();
 
-        //==========================
-        // function initPage(){
-        //     var ref = firebaseDataRef.child('pages/' + homeId);
-        //     $firebaseObject(ref).$loaded().then(function(data){
-        //         $scope.data = data;
-        //     }); 
-        // }
-        
 	}
 
 })();
