@@ -99,9 +99,7 @@
                     // from_name: vm.model.fromName,
                     // to_name: vm.model.toName,
                     subject: 'Your transaction',
-                    message_html: 'Pleas go to admin to create this history transaction </br/> type: ' + type.text + ' Amount: ' 
-                    + vm.model.amount + ' Code: ' + vm.model.code + ' user email: ' + currentUser.email + ' user key: ' + currentUser.$id 
-                    + ' transaction key: ' + res.key,
+                    message_html: 'Pleas go to admin to create this history transaction </br/> type: ' + type.text + ' Amount: ' + vm.model.amount + ' Code: ' + vm.model.code + ' user email: ' + currentUser.email + ' user key: ' + currentUser.$id + ' transaction key: ' + res.key,
                     cc: '',
                     bcc: ''
                 };
