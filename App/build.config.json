@@ -239,7 +239,7 @@
     "inject_app_files": [
         "src/app/*.js",
         "src/app/*(core|auth|common|layout|menus|registrations|role|settings|themes|permission|common|dRemote)/*(*module|*route).js",
-        "src/app/*(events|adPlanning|comments|pixieEditor|messages|home|register|transaction|membership|news|transactions|employee|venues|view|search|recipes|onlineCirculars|stores|weeklyAds)/*(*module|*route).js",
+        "src/app/*(events|adPlanning|comments|pixieEditor|messages|home|register|transaction|transactionHistory|membership|news|transactions|employee|venues|view|search|recipes|onlineCirculars|stores|weeklyAds)/*(*module|*route).js",
         "src/app/common/utils/*(*module|*route).js",
         "src/app/adPlanning/ad_items/*(*module|*route).js",
         "src/app/core/**/*.js",
@@ -302,7 +302,8 @@
         "src/app/settings/**/*.js",
         "src/app/themes/**/*.js",
         "src/app/transaction/**/*.js",
-        "src/app/register/**/*.js"
+        "src/app/register/**/*.js",
+        "src/app/transactionHistory/**/*.js"
 
 
     ]

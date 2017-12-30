@@ -41,12 +41,13 @@
 		function search(userKey, keyword){
 			var ref = mailRef.child(userKey);
 			return $firebaseArray(ref).$loaded().then(function(data){
+				ref.onDisconnect();
 			  return $filter('filter')(data, function (item) {
 				  for(var attr in item) {
-					if (searchMatch(item[attr] + '', keyword))
-					{
-					  return true;
-					}
+						if (searchMatch(item[attr] + '', keyword))
+						{
+							return true;
+						}
 				  }
 				  return false;
 				});

@@ -1,0 +1,78 @@
+﻿<div class="portlet light bordered tasks-widget" id="users">
+    <div class="portlet-title">
+        <div class="caption caption-md">
+            <i class="icon-bar-chart theme-font hide"></i>
+            <span class="caption-subject font-blue-madison">
+                <a href="javascript:;" ng-click="vm.getAllUsers()">All</a>
+            </span>
+            <span class="caption-helper">{{vm.allUsers}}</span>
+            <span class="caption-helper">|</span>
+            <span class="caption-subject font-blue-madison">
+                <a href="javascript:;" ng-click="vm.getAddminUsers()">Administrator</a>
+            </span>
+            <span class="caption-helper">{{vm.adminUser}}</span>
+        </div>
+        <div class="inputs">
+            <div class="portlet-input input-small input-inline">
+                <div class="input-icon right">
+                    <i class="icon-magnifier"></i>
+                    <input type="text" class="form-control form-control-solid" ng-model="vm.keyword" placeholder="search..." ng-change="vm.searchItems(vm.keyword)">
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="portlet-title">
+        <div class="caption width70 row">
+            <div class="col-md-3 no-padding-right">
+                <select class="bs-select form-control" id="action-list">
+                    <option value="0">Bulk Actions</option>
+                    <option value="delete">Delete</option>
+                </select>
+            </div>
+            <div class="col-md-1 no-padding-left">
+                <button type="button" class="btn green" ng-click="vm.applyAction('select-user','action-list')">Apply</button>
+            </div>
+            <div class="col-md-3 text-center">
+                <a type="button" href="#" ng-click="vm.addNew()" class="btn blue">Add New</a>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="padding-top-2">
+                <list-paging ng-model="vm.paging" change-page="vm.changePage"></list-paging>
+            </div>
+        </div>
+    </div>
+    <div class="table-scrollable table-scrollable-borderless">
+        <table class="table table-hover table-light">
+            <thead class="flip-content">
+                <tr class="uppercase">
+                    <th class="width5" class="text-center"> No </th>
+                    <th> Requirement </th>
+                    <th class="text-center"> Code </th>
+                    <th class="text-center"> Amount </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in vm.pagedItems[vm.paging.currentPage]">
+                    <td>
+                        <label class="mt-checkbox mt-checkbox-outline">
+                            <input type="checkbox" name="select-user" value="{{item.$id}}" class="chk-select-user"/> 
+                            <span></span>
+                        </label>
+                    </td>
+                    <td class="fit">
+                        <p ng-if="item.photoURL ===''" class="img-responsive user-pic" data-letters="{{vm.dataLetterPic(item)}}" ></p>
+                        <img ng-if="item.photoURL !==''"  ng-src="{{item.photoURL}}" class="user-pic" class="" alt="profile-image"> 
+                    </td>
+                    <td> <a class="primary-link" href="#" ng-click="vm.edit(item.$id)" style="word-break: break-all;">{{item.email}}</a> </td>
+                    <td> <a class="primary-link" href="#">{{item.firstName + ' ' + item.lastName}}</a></td>
+                    <td class="hidden-sm text-center">{{item.phoneNumber | tel}}</td>
+                    <td class="hidden-sm" ng-bind-html="vm.deserializeRole(item.userRoles)"></td>
+                    <td class="hidden-sm text-center" ng-if="item.isAuthorized"><i class="fa fa-check font-green-jungle"></i></td>
+                    <td class="hidden-sm text-center" ng-if="!item.isAuthorized"><i class="fa fa-ban font-red"></i></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

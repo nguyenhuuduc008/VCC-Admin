@@ -29,10 +29,14 @@
                                                 <option ng-repeat="item in vm.requirementTypes" value="{{item.value}}" ng-selected="item.value == vm.model.requirementType">{{item.text}}</option>
                                             </select>
                                         </div> 
-                                        <div class="form-group col-md-6" ng-class="{'has-error': (vm.showInvalid && createForm.amount.$error.required) || createForm.amount.$error.pattern}"} >
+                                        <div class="form-group col-md-3" ng-class="{'has-error': (vm.showInvalid && createForm.amount.$error.required) || createForm.amount.$error.pattern}"} >
                                             <label class="control-label">Amount <span class="required-field">*</span></label>
-                                            <input type="text" name="amount" placeholder="Amount" class="form-control" required ng-pattern="vm.numberRegx" ng-model="vm.model.amount"/>
+                                            <input type="text" name="amount" placeholder="Amount" ng-keyup="vm.calVccAmount()" class="form-control" required ng-pattern="vm.numberRegx" ng-model="vm.model.amount"/>
                                             <label class="control-label" ng-show="createForm.amount.$error.pattern">* This field allow number</label>
+                                        </div>
+                                        <div class="form-group col-md-3" >
+                                            <label class="control-label">VCC</label>
+                                            <input type="text" ng-show="vm.model.amount >= 0" disabled value="≈ {{vm.model.vccAmount}} VCC" class="form-control"/>
                                         </div>
                                         <div class="form-group col-md-12" ng-class="{'has-error': (vm.showInvalid && createForm.Code.$error.required)}">
                                             <label class="control-label">Code <span class="required-field">*</span></label>
@@ -71,18 +75,21 @@
                             <table class="table table-hover table-light">
                                 <thead class="flip-content">
                                     <tr class="uppercase">
-                                        <th class="width5"> No </th>
+                                        <th class="width5" class="text-center"> No </th>
                                         <th> Requirement </th>
-                                        <th> Code </th>
-                                        <th> Amount </th>
+                                        <th class="text-center"> Code </th>
+                                        <th class="text-center"> Amount </th>
+                                        <th class="text-center width5"> Status </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="item in vm.pagedItems[vm.paging.currentPage]">
-                                        <td> {{$index + 1}}</td>
+                                        <td class="text-center"> {{$index + 1}}</td>
                                         <td> {{vm.displayType(item.requirementType)}} </td>
-                                        <td> {{item.amount}} </td>
-                                        <td> {{item.code}} </td>
+                                        <td class="text-center"> {{item.code}} </td>
+                                        <td class="text-center"> {{item.amount}} </td>
+                                        <td class="text-center" ng-if="item.status == 1"><i class="fa fa-check font-green-jungle"></i></td>
+                                        <td class="text-center" ng-if="item.status == 0"><i class="fa fa-ban font-red"></i></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -93,8 +100,6 @@
             </div>
         </div>
         <!-- END PROFILE CONTENT -->
-    </div>
-    <div class="col-md-6">
     </div>
 </div>
 <!-- END PAGE BASE CONTENT -->

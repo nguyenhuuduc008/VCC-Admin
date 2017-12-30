@@ -69,7 +69,8 @@
             'app.search',
             'app.dRemote',
             'app.transaction',
-            'app.register'
+            'app.register',
+            'app.transactionHistory'
 		])
 		.config(config)
 		.run(run)

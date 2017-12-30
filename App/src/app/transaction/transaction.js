@@ -15,27 +15,28 @@
             return;
         }
         var appSettings = $rootScope.storage.appSettings;
-        console.log('-------appSettings');
-        console.log(appSettings);
         var homeId = appSettings.pageHomeId || '-Kor_iCNGYs-AZewc_I3';
         var vm = this;
         vm.showInvalid = false;
         vm.numberRegx = /^\d+$/;
         
         vm.requirementTypes = [{
-            value: '0',
-            text: 'Bitcoin to VCC',
-        },{
-            value: '1',
-            text: 'VCC to Bitcoin',
-        }];
+                value: '0',
+                text: 'Bitcoin to VCC',
+            }
+            // ,{
+            //     value: '1',
+            //     text: 'VCC to Bitcoin',
+            // }
+        ];
         vm.model = {
             requirementType: '',
             amount: 0,
-            code: ''
+            code: '',
+            status: 0,
+            vccAmount: 0
         };
 
-        
         vm.groupedItems = [];
         vm.filteredItems = [];
         vm.pagedItems = [];
@@ -57,6 +58,11 @@
                 console.log("FAILED. error=", err);
                 appUtils.hideLoading();
             });
+        };
+
+        vm.calVccAmount = function(){
+            //Calculate vcc amount
+            vm.model.vccAmount = vm.model.amount * (1 / 0.5); // 1 VCC = $0.5
         };
 
 		vm.create = function(form){
@@ -85,7 +91,7 @@
                 };
                 vm.sendGmailMessage(mail);
                 vm.searchItems('');
-                toaster.pop('success','Success', "Mail Created.");
+                toaster.pop('success','Success', "Created success!");
                 appUtils.hideLoading();
                 vm.model = {};
             }, function(res){
@@ -93,7 +99,6 @@
                 appUtils.hideLoading();
                 return;
             });
-
         };
         
         vm.groupToPages = function () {
@@ -126,6 +131,7 @@
 
         vm.displayType = function(value){
             var type = _.find(vm.requirementTypes, function(o) { return o.value.toString() === value.toString(); });
+            if(!type) return '';
             return type.text;
         };
 
