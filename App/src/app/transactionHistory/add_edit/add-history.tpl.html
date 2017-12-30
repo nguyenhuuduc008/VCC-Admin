@@ -13,93 +13,58 @@
                         <div class="portlet-title tabbable-line">
                             <div class="caption caption-md">
                                 <i class="icon-globe theme-font hide"></i>
-                                <span class="caption-subject font-blue-madison bold uppercase">User Infomation</span>
+                                <span class="caption-subject font-blue-madison bold uppercase">Transaction Infomation</span>
                             </div>
                             <ul class="nav nav-tabs">
                                 <li class="active">
-                                    <a href="#tab_1_1" data-toggle="tab">User Info</a>
+                                    <a href="#tab_1_1" data-toggle="tab">Transaction</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="portlet-body">
                             <div class="tab-content">
                                 <!-- PERSONAL INFO TAB -->
-                                <div class="tab-pane active row" id="tab_1_1">                            
-                                    <form role="form" id="createUserForm" name="createUserForm" novalidate ng-submit="userAddVm.create(createUserForm)" >
-                                        <div class="form-group col-md-12" ng-class="{'has-error': (userAddVm.showInvalid && createUserForm.email.$error.required) || (createUserForm.email.$error.pattern || createUserForm.email.$error.email)}">
-                                            <label class="control-label">Email <span class="required-field">*</span></label>
-                                            <input type="email" placeholder="Email" class="form-control" name="email" ng-model="userAddVm.user.email" required  autocapitalize="off" ng-pattern="emailRegx"/>
-                                            <!--<label class="control-label" ng-show="userAddVm.showInvalid && createUserForm.email.$error.required">* This field is required</label>-->
-                                            <label class="control-label" ng-show="createUserForm.email.$error.pattern || createUserForm.email.$error.email">* This is not valid</label>
-                                        </div> 
-                                        <div class="form-group col-md-6" ng-class="{'has-error': (userAddVm.showInvalid && createUserForm.firstname.$error.required) || createUserForm.firstname.$error.pattern}">
-                                            <label class="control-label">First Name <span class="required-field">*</span></label>
-                                            <input type="text" name="firstname" placeholder="First Name" class="form-control" required ng-pattern="nameRegx" ng-model="userAddVm.user.firstName"/>
-                                            <!--<label class="control-label" ng-show="userAddVm.showInvalid && createUserForm.firstname.$error.required">* This field is required</label>-->
-                                            <label class="control-label" ng-show="createUserForm.firstname.$error.pattern">* This field does not allow special characters</label>
-                                        </div>
-                                        <div class="form-group col-md-6" ng-class="{'has-error': (userAddVm.showInvalid && createUserForm.lastname.$error.required) || createUserForm.lastname.$error.pattern}"} >
-                                            <label class="control-label">Last Name <span class="required-field">*</span></label>
-                                            <input type="text" name="lastname" placeholder="Last Name" class="form-control"required ng-pattern="nameRegx" ng-model="userAddVm.user.lastName"/>
-                                            <!--<label class="control-label" ng-show="userAddVm.showInvalid && createUserForm.lastname.$error.required">* This field is required</label>-->
-                                            <label class="control-label" ng-show="createUserForm.lastname.$error.pattern">* This field does not allow special characters</label>
-                                        </div>
-                                        <div class="form-group col-md-12">
-                                            <label class="control-label">Phone Number</label>  
-                                            <input type="tel" uiMaskPlaceholder type="phone" placeholder="Primary Phone" class="form-control" name="phonenumber" ng-model="userAddVm.user.phoneNumber" ui-mask="999-999-9999"/>
-                                        </div>
-                                        <div class="form-group col-md-6" ng-class="{'has-error': (userAddVm.showInvalid && createUserForm.address.$error.required)}">
-                                            <label class="control-label" >Address </label>
-                                            <input name="address" type="text" placeholder="Address" ng-model="userAddVm.user.address" class="form-control" />
-                                            <!--<label class="control-label" ng-show="userAddVm.showInvalid && createUserForm.address.$error.required">* This field is required</label>-->
-                                            <label class="control-label" ng-show="createUserForm.address.$error.pattern">* This field does not allow special characters</label>
-                                        </div>
-                                        <div class="form-group col-md-6" ng-class="{'has-error': (userAddVm.showInvalid && createUserForm.city.$error.required)}">
-                                            <label class="control-label" >City </label>   
-                                            <input name="city" type="text" placeholder="City" ng-model="userAddVm.user.city" class="form-control" />
-                                            <!--<label class="control-label" ng-show="userAddVm.showInvalid && createUserForm.city.$error.required">* This field is required</label>-->
-                                            <!--<label class="control-label" ng-show="createUserForm.city.$error.pattern">* This field does not allow special characters</label>-->
-                                        </div>
-                                         <div class="form-group col-md-6" ng-class="{'has-error': userAddVm.showInvalid && createUserForm.state.$error.required}">
-                                            <label class="control-label" >State </label>
-                                            <select name="state" ng-model="userAddVm.user.state" class="form-control" >
-                                                <option value="" disabled >Please Choose State</option>
-                                                <option ng-repeat="state in userAddVm.states" value="{{state.value}}" ng-selected="state.value == userAddVm.user.state">{{state.text}}</option>
-                                            </select>
-                                            <!--<label class="control-label" ng-show="userAddVm.showInvalid && createUserForm.state.$error.required">* This field is required</label>-->
-                                        </div>
-                                        <div class="form-group col-md-6" ng-class="{'has-error': (userAddVm.showInvalid && createUserForm.zipCode.$error.required) || createUserForm.zipCode.$error.pattern}">
-                                            <label class="control-label" >Zip</label>
-                                            <input name="zipCode" type="text" placeholder="Zip Code" ng-model="userAddVm.user.zipCode" maxlength="5" ng-pattern="zipcodeRegx"  ng-maxlength="5"  class="form-control" />
-                                            <!--<label class="control-label" ng-show="customerDetailVm.showInvalid && customerForm.zip.$error.required">* This field is required</label>-->
-                                        </div>
-                                        <div class="form-group col-md-12" >
-                                            <div ng-class="{'has-error': (userAddVm.showInvalid && createUserForm.password.$error.required) || createUserForm.password.$error.pattern}" >
-                                                <label class="control-label">Password <span class="required-field">*</span></label>
-                                                <input name="password" type="password" placeholder="Password" class="form-control " ng-model="userAddVm.user.password" required ng-pattern="passwordRegx"/>
-                                                <!--<label class="control-label" ng-show="userAddVm.showInvalid && createUserForm.password.$error.required">* This field is required</label>-->
-                                                <label class="control-label" ng-show="createUserForm.password.$error.pattern">* Password must be 6-12 characters long and include at least one letter and one number. Passwords are case sensitive.</label>
+                                <div class="tab-pane active row" id="tab_1_1">     
+                                    <form role="form" id="createForm" name="createForm" novalidate ng-submit="vm.create(createForm)" >
+                                            <div class="form-group col-md-6" ng-class="{'has-error': (vm.showInvalid && createForm.requirementType.$error.required)}">
+                                                <label class="control-label">Requirement <span class="required-field">*</span></label>
+                                                <select name="requirementType" ng-model="vm.model.requirementType" class="form-control" required>
+                                                    <option value="" disabled >Please Choose Type</option>
+                                                    <option ng-repeat="item in vm.requirementTypes" value="{{item.value}}" ng-selected="item.value == vm.model.requirementType">{{item.text}}</option>
+                                                </select>
+                                            </div> 
+                                            <div class="form-group col-md-3" ng-class="{'has-error': (vm.showInvalid && createForm.amount.$error.required) || createForm.amount.$error.pattern}"} >
+                                                <label class="control-label">Amount <span class="required-field">*</span></label>
+                                                <input type="text" name="amount" placeholder="Amount" ng-keyup="vm.calVccAmount()" class="form-control" required ng-pattern="vm.numberRegx" ng-model="vm.model.amount"/>
+                                                <label class="control-label" ng-show="createForm.amount.$error.pattern">* This field allow number</label>
                                             </div>
-                                        <div class="form-group col-md-12" >
-                                        </div>
-                                            <div ng-class="{'has-error': (userAddVm.showInvalid && createUserForm.confirmPassword.$error.required) || createUserForm.confirmPassword.$error.match}" >
-                                                <label class="control-label">Retype Password <span class="required-field">*</span></label>
-                                                <input name="confirmPassword" type="password" placeholder="Retype Password" class="form-control " ng-model="userAddVm.user.confirmPassword" required password-match="userAddVm.user.password"/>
-                                                <!--<label class="control-label" ng-show="userAddVm.showInvalid && createUserForm.password.$error.required">* This field is required</label>-->
-                                                <label class="control-label" ng-show="createUserForm.confirmPassword.$error.match">* Passwords do not match.</label>
+                                            <div class="form-group col-md-3" >
+                                                <label class="control-label">VCC</label>
+                                                <input type="text" ng-show="vm.model.amount >= 0" disabled value="≈ {{vm.model.vccAmount}} VCC" class="form-control"/>
                                             </div>
-                                        </div>
-                                        <div class=" col-md-12">
-                                            <div class="margin-top-20">
-                                                <button class="btn green grreen-haze" type="submit" ng-disabled="createUserForm.$invalid">
-                                                    Add
-                                                </button> 
-                                                <button class="btn default" type="button" ng-click="userAddVm.cancel()">
-                                                    Cancel
-                                                </button>
+                                            <div class="form-group col-md-12" ng-class="{'has-error': (vm.showInvalid && createForm.code.$error.required)}">
+                                                <label class="control-label">Code <span class="required-field">*</span></label>
+                                                <input type="text" placeholder="Code" class="form-control" name="code" ng-model="vm.model.code" autocapitalize="off" required/>
+                                            </div> 
+                                            <div class="form-group col-md-6" ng-class="{'has-error': (vm.showInvalid && createForm.userKey.$error.required)}">
+                                                <label class="control-label">User key <span class="required-field">*</span></label>
+                                                <input type="text" placeholder="User key" class="form-control" name="userKey" ng-model="vm.model.userKey" autocapitalize="off" required/>
                                             </div>
-                                        </div>
-                                    </form>
+                                            <div class="form-group col-md-6" ng-class="{'has-error': (vm.showInvalid && createForm.transactionKey.$error.required)}">
+                                                <label class="control-label">Transaction key <span class="required-field">*</span></label>
+                                                <input type="text" placeholder="Transaction Key" class="form-control" name="transactionKey" ng-model="vm.model.transactionKey" autocapitalize="off" required/>
+                                            </div>
+                                            <div class=" col-md-12">
+                                                <div class="margin-top-20">
+                                                    <button class="btn green grreen-haze" type="submit" ng-disabled="createForm.$invalid">
+                                                        Create
+                                                    </button> 
+                                                    <button class="btn default" type="button" ng-click="vm.cancel()">
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
                                 </div>
                                 <!-- END PERSONAL INFO TAB -->
                             </div>

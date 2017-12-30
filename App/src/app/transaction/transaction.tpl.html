@@ -79,7 +79,7 @@
                                         <th> Requirement </th>
                                         <th class="text-center"> Code </th>
                                         <th class="text-center"> Amount </th>
-                                        <th class="text-center width5"> Status </th>
+                                        <th class="text-center"> Status </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -88,8 +88,8 @@
                                         <td> {{vm.displayType(item.requirementType)}} </td>
                                         <td class="text-center"> {{item.code}} </td>
                                         <td class="text-center"> {{item.amount}} </td>
-                                        <td class="text-center" ng-if="item.status == 1"><i class="fa fa-check font-green-jungle"></i></td>
-                                        <td class="text-center" ng-if="item.status == 0"><i class="fa fa-ban font-red"></i></td>
+                                        <td class="text-center" ng-if="item.status == 1">Approved</td>
+                                        <td class="text-center" ng-if="item.status == 0">New</td>
                                     </tr>
                                 </tbody>
                             </table>

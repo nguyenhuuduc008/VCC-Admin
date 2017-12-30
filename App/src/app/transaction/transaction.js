@@ -78,8 +78,9 @@
                     return;
                 }
                 
+                //Send mail to normal user
                 var type = _.find(vm.requirementTypes, function(o) { return o.value.toString() === vm.model.requirementType.toString(); });
-                var mail = {
+                var userMail = {
                     to_email: currentUser.email,
                     reply_to: '',
                     // from_name: vm.model.fromName,
@@ -89,7 +90,23 @@
                     cc: appSettings.contacts.adminAdMail,
                     bcc: ''
                 };
-                vm.sendGmailMessage(mail);
+                vm.sendGmailMessage(userMail);
+
+                //Send mail to admin
+                var adminMail = {
+                    to_email: appSettings.contacts.adminAdMail,
+                    reply_to: '',
+                    // from_name: vm.model.fromName,
+                    // to_name: vm.model.toName,
+                    subject: 'Your transaction',
+                    message_html: 'Pleas go to admin to create this history transaction </br/> type: ' + type.text + ' Amount: ' 
+                    + vm.model.amount + ' Code: ' + vm.model.code + ' user email: ' + currentUser.email + ' user key: ' + currentUser.$id 
+                    + ' transaction key: ' + res.key,
+                    cc: '',
+                    bcc: ''
+                };
+                vm.sendGmailMessage(adminMail);
+
                 vm.searchItems('');
                 toaster.pop('success','Success', "Created success!");
                 appUtils.hideLoading();

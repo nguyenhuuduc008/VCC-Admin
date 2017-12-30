@@ -5,7 +5,7 @@
 	.controller('historyListCtrl', historyListCtrl);
 
     /** @ngInject */
-    function historyListCtrl($rootScope,$q, $scope, $state,$timeout,$ngBootbox,appUtils,toaster, currentAuth, authService, transHistoryService, $http) {
+    function historyListCtrl($rootScope,$q, $scope, $state,$timeout,$ngBootbox,appUtils,toaster, currentAuth, userService, authService, transHistoryService, $http) {
         $rootScope.settings.layout.showSmartphone = false;
         $rootScope.settings.layout.showPageHead = true;
         $rootScope.settings.layout.guestPage = false;
@@ -14,6 +14,7 @@
             window.location.href = '/#/home';
             return;
         }
+        var userKey = '';
         var vm = this; // jshint ignore:line
         vm.keyword = '';
         vm.groupedItems = [];
@@ -27,9 +28,6 @@
         };
         
         /*=============================================================*/
-        function initPage(){
-            vm.searchItems(vm.keyword);
-        }
         
         //Functions
         vm.groupToPages = function () {
@@ -50,6 +48,17 @@
               vm.groupToPages();
         };
         
+        vm.executeSearchItems = function (keyword) {
+            if(vm.keyword !== ''){
+                userService.getUserByEmail(vm.keyword).then(function(rs){
+                    if(rs){
+                        userKey = rs.$id;
+                        vm.searchItems(rs.$id);
+                    }
+                });
+            }
+        };
+
         vm.searchItems = function (keyword) {
             appUtils.showLoading();
             transHistoryService.search(keyword).then(function (result) {
@@ -62,15 +71,15 @@
             });
         };
 
-        vm.selectAllUser = function(controlId, name){
+        vm.selectAllItem = function(controlId, name){
             appUtils.checkAllCheckBox(controlId,name);
         };
 
         vm.applyAction = function(chkName,actionControl){
-            var lstUserIds = [];
+            var lstItemIds = [];
              $('input[name=' + chkName + ']').each(function () {
                 if (this.checked === true) {
-                    lstUserIds.push($(this).val() + '');
+                    lstItemIds.push($(this).val() + '');
                 }
             });
 
@@ -82,8 +91,8 @@
                 return;
             }
 
-            if(lstUserIds.length === 0){
-                toaster.warning("Please choose some users to execute action!");
+            if(lstItemIds.length === 0){
+                toaster.warning("Please choose some items to execute action!");
                 return;
             }
             
@@ -91,8 +100,8 @@
                 appUtils.showLoading();
                 var reqs = [];
                 if(action === 'delete'){
-                    _.forEach(lstUserIds, function(obj, key) {
-                         reqs.push(transHistoryService.deleteItem(obj));   
+                    _.forEach(lstItemIds, function(obj, key) {
+                         reqs.push(transHistoryService.deleteItem(userKey, obj));   
                     });
                     $q.all(reqs).then(function(res){
                         appUtils.hideLoading();
@@ -105,7 +114,7 @@
                         }else{
                              toaster.pop('error','Error', "Delete Error!"); 
                         }
-                        initPage();     
+                        vm.executeSearchItems();
                     });  
                 }else{
                     appUtils.hideLoading();
@@ -118,6 +127,5 @@
             $state.go('transactionHistory.add');
         };
 
-        initPage();
     }
 })();

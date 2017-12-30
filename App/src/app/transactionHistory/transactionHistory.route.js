@@ -25,7 +25,9 @@
 						files: [
 							'./lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
 							'./lib/angular-bootstrap/ui-bootstrap.min.js',
-							'./app/transactionHistory/transactionHistory.service.js'
+							'./app/transactionHistory/transactionHistory.service.js',
+							'./app/customer/customer.service.js',
+							'./app/user/user.service.js'
 						]
 					});
 				}]
@@ -35,7 +37,7 @@
 		states['transactionHistory.list'] = {
 			url: '/list',
 			templateUrl: './app/transactionHistory/list/history-list.tpl.html',
-			controller: 'historyListCtrl as Vm',
+			controller: 'historyListCtrl as vm',
 			data: {
 				pageTitle: 'Transaction History',
 				module: 'transactionHistory',

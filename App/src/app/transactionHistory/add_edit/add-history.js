@@ -4,13 +4,14 @@
 	angular.module("app.transactionHistory")
 	.controller("addTransHistoryCtrl" , addTransHistoryCtrl);
 	/** @ngInject **/
-	function addTransHistoryCtrl($rootScope, $scope, $state,$ngBootbox, transHistoryService, authService, currentAuth,appUtils, toaster){
+	function addTransHistoryCtrl($rootScope, $scope, $state,$ngBootbox, transHistoryService, transactionService, authService, currentAuth,appUtils, toaster){
 		$rootScope.settings.layout.showSmartphone = false;
 		$rootScope.settings.layout.showPageHead = true;
         $rootScope.settings.layout.guestPage = false;
         if($rootScope.reProcessSideBar){
             $rootScope.reProcessSideBar = false;
         }
+		var currentUser = $rootScope.storage.currentUser;
 
 		var vm = this; // jshint ignore:line
 		vm.showInvalid = false;
@@ -29,8 +30,11 @@
             requirementType: '',
             amount: 0,
             code: '',
-            status: 0,
-            vccAmount: 0
+            status: 1,
+			vccAmount: 0,
+			userEmail: '',
+			userKey: '',
+			transactionKey: ''
         };
         vm.model = {
             requirementType: '',
@@ -51,27 +55,24 @@
 				return;
 			}
 			
-            transactionService.create(currentUser.$id, vm.model).then(function(res){
+			vm.model.createdBy = currentUser.email.trim();
+			vm.model.status = 1;
+            transHistoryService.create(vm.model.userKey.trim(), vm.model).then(function(res){
                 if(!res.result){				
                     $ngBootbox.alert(res.errorMsg);
                     return;
                 }
-                
-                var type = _.find(vm.requirementTypes, function(o) { return o.value.toString() === vm.model.requirementType.toString(); });
-                var mail = {
-                    to_email: currentUser.email,
-                    reply_to: '',
-                    // from_name: vm.model.fromName,
-                    // to_name: vm.model.toName,
-                    subject: 'Your transaction',
-                    message_html: 'This is a transaction </br/> type: ' + type.text + ' Amount: ' + vm.model.amount + ' Code: ' + vm.model.code,
-                    cc: appSettings.contacts.adminAdMail,
-                    bcc: ''
-                };
-                // vm.sendGmailMessage(mail);
-                vm.searchItems('');
-                toaster.pop('success','Success', "Created success!");
+				
+				var updatedObj = {
+					userKey: vm.model.userKey,
+					transactionKey: vm.model.transactionKey,
+					status: 1
+				};
+				transactionService.updateStatus(updatedObj).then(function(){
+				});
+				
                 appUtils.hideLoading();
+                toaster.pop('success','Success', "Created success!");
                 vm.model = {};
             }, function(res){
                 $ngBootbox.alert(res.errorMsg);

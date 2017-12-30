@@ -14,51 +14,59 @@
             search: search
 		};
 
-		var userRef = firebaseDataRef.child('transaction-histories');
+		var historyRef = firebaseDataRef.child('transaction-histories');
 
 		return service;
 
 		function getAll(){
-			return $firebaseArray(userRef);
+			return $firebaseArray(historyRef);
 		}
 
 		function get(id){
-			var ref = userRef.child(id);
+			var ref = historyRef.child(id);
 			return $firebaseObject(ref);
 		}
 
-		function create(item, uid){
+		function create(userEmail, obj){
+        	var key = historyRef.push().key;
 			var ts = appUtils.getTimestamp();
-			item.timestampModified = ts;
-			item.timestampCreated = ts;
-            return userRef.child(uid).set(item).then(function(res){
-				return {result: true , data: uid};
+			obj.timestampModified = ts;
+			obj.timestampCreated = ts;
+            return historyRef.child(userEmail).child(key).set(obj).then(function(res){
+		        return {result: true , key: key};
             }).catch(function(error) {
 		        return {result: false , errorMsg: error};
 		    });
 		}
 
-        function deleteItem(uid){
+        function deleteItem(userKey, transKey){
 			var ts = appUtils.getTimestamp();
-            return userRef.child(uid).update({isDeleted: true, timestampModified: ts}).then(function(res){
+            return historyRef.child(userKey).child(transKey).update({isDeleted: true, timestampModified: ts}).then(function(res){
                 return {result: true};
             }).catch(function(error) {
 		        return {result: false , errorMsg: error};
 		    });
 		}
 
-		function search(keyword){
+		function search(userKey){
+			var userRef = firebaseDataRef.child('transaction-histories/' + userKey);
 			return $firebaseArray(userRef).$loaded().then(function(data){
-				userRef.onDisconnect();
-				var searchFields = ['email'];
+				historyRef.onDisconnect();
+				// var searchFields = ['email'];
 				return $filter('filter')(data, function (item) {
-					for(var index in searchFields) {
-						var attr = searchFields[index];
-						if (searchMatch(item[attr] + '', keyword) && (!item.isDeleted || item.isDeleted === ''))
-						{
-							return true;
-						}
+					// for(var attr in item) {
+					if (!item.isDeleted || item.isDeleted === '')
+					{
+						return true;
 					}
+					//   }
+					// for(var index in searchFields) {
+					// 	var attr = searchFields[index];
+					// 	if (searchMatch(item[attr] + '', keyword) && (!item.isDeleted || item.isDeleted === ''))
+					// 	{
+					// 		return true;
+					// 	}
+					// }
 					return false;
 				});
 			});

@@ -10,36 +10,51 @@
 			getAll: getAll,
 			get: get,
 			create: create,
+			updateStatus: updateStatus,
 			search: search
 		};
 
-		var mailRef = firebaseDataRef.child('transactions');
+		var transRef = firebaseDataRef.child('transactions');
 
 		return service;
 
 		function getAll(){
-			return $firebaseArray(mailRef);
+			return $firebaseArray(transRef);
 		}
 
 		function get(id){
-			var ref = mailRef.child(id);
+			var ref = transRef.child(id);
 			return $firebaseObject(ref);
 		}
 
 		function create(userKey, obj){
-        	var key = mailRef.push().key;
+        	var key = transRef.push().key;
 			var ts = appUtils.getTimestamp();
 			obj.timestampModified = ts;
 			obj.timestampCreated = ts;
-            return mailRef.child(userKey).child(key).set(obj).then(function(res){
-		        return {result: true , errorMsg: ""};
+            return transRef.child(userKey).child(key).set(obj).then(function(res){
+		        return {result: true , key: key};
+            }).catch(function(error) {
+		        return {result: false , errorMsg: error};
+		    });
+		}
+		
+        function updateStatus(obj){
+			var ts = appUtils.getTimestamp(),
+			userKey = obj.userKey,
+			transactionKey = obj.transactionKey;
+			obj.timestampModified = ts;
+            return transRef.child(userKey).child(transactionKey).update({
+				status: obj.status,
+				timestampModified: ts}).then(function(res){
+				return {result: true , data: key};
             }).catch(function(error) {
 		        return {result: false , errorMsg: error};
 		    });
 		}
 
 		function search(userKey, keyword){
-			var ref = mailRef.child(userKey);
+			var ref = transRef.child(userKey);
 			return $firebaseArray(ref).$loaded().then(function(data){
 				ref.onDisconnect();
 			  return $filter('filter')(data, function (item) {
