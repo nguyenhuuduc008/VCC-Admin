@@ -1,3 +1,80 @@
+**Version 1.7.22**
+- Reverted removal of this.ctx
+
+**Version 1.7.21**
+- BACKPORT cache fuzzyness fix part 2
+- BACKPORT freedrawing fix part 2
+- BACKPORT toDataURL backstoreOnly resize
+- BACKPORT Removal of unnecessary context creation on text init
+
+**Version 1.7.20**
+- BACKPORT Group from object and subTargetCheck fix [#4454](https://github.com/kangax/fabric.js/pull/4454)
+- BACKPORT cache canvas deletion fix [#4453](https://github.com/kangax/fabric.js/pull/4453)
+- BACKPORT cache fuzzyness fix [#4452](https://github.com/kangax/fabric.js/pull/4452)
+- Fixed noScaleCache from stop refreshing cache of not transforming objects [#4358](https://github.com/kangax/fabric.js/pull/4358)
+
+**Version 1.7.19**
+
+- Fixed drawing path displacement [#4318](https://github.com/kangax/fabric.js/pull/4318)
+- Fixed the flip of images with scale equally [#4313](https://github.com/kangax/fabric.js/pull/4313)
+- Improved touch detection [#4302](https://github.com/kangax/fabric.js/pull/4302)
+
+**Version 1.7.18**
+
+- Fixed doubling of subtargets for preserveObjectStacking = true [#4297](https://github.com/kangax/fabric.js/pull/4297)
+- Added a dirty set to objects in group destroy.
+
+**Version 1.7.17**
+
+- Change: swapped style white-space:nowrap with attribute wrap="off" since the style rule was creating problems in browsers like ie11 and safari. [#4119](https://github.com/kangax/fabric.js/pull/4119)
+- Fix: Remove an object from activeGroup if removed from canvas [#4120](https://github.com/kangax/fabric.js/pull/4120)
+- Fix: avoid bringFroward, sendBackwards to swap objects in active selections [#4119](https://github.com/kangax/fabric.js/pull/4119)
+- Fix: avoid disposing canvas on mouse event to throw error [#4119](https://github.com/kangax/fabric.js/pull/4119)
+- Fix: make svg respect white spaces [#4119](https://github.com/kangax/fabric.js/pull/4119)
+- Fix: avoid exporting bgImage and overlayImage if excludeFromExport = true [#4119](https://github.com/kangax/fabric.js/pull/4119)
+- Fix: Avoid group fromObject mutating original data [#4111](https://github.com/kangax/fabric.js/pull/4111)
+
+**Version 1.7.16**
+
+- Improvement: Add information to onChange and onComplete animation function [#4068](https://github.com/kangax/fabric.js/pull/4068)
+- Improvement: avoid multiplying identity matrices in calcTransformMatrix function
+- Fix: ativeGroup did not destroy correctly if a toObject was happening
+- Improvement: Pass the event to object:modified when available. [#4061](https://github.com/kangax/fabric.js/pull/4061)
+
+**Version 1.7.15**
+
+- Improvement: Made iText keymap public. [#4053](https://github.com/kangax/fabric.js/pull/4053)
+- Improvement: Fix a bug in updateCacheCanvas that was returning always true [#4051](https://github.com/kangax/fabric.js/pull/4051)
+
+**Version 1.7.14**
+
+- Improvement: Avoid cache canvas to resize each mouse move step. [#4037](https://github.com/kangax/fabric.js/pull/4037)
+- Improvement: Make cache canvas limited in size. [#4035](https://github.com/kangax/fabric.js/pull/4035)
+- Fix: Make groups and statefull cache work. [#4032](https://github.com/kangax/fabric.js/pull/4032)
+- Add: Marked the hiddentextarea from itext so that custom projects can recognize it. [#4022](https://github.com/kangax/fabric.js/pull/4022)
+
+**Version 1.7.13**
+
+- Fix: Try to minimize delay in loadFroJson [#4007](https://github.com/kangax/fabric.js/pull/4007)
+- Fix: allow fabric.Color to parse rgba(x,y,z,.a) without leading 0 [#4006](https://github.com/kangax/fabric.js/pull/4006)
+- Allow path to execute Object.initialize, make extensions easier [#4005](https://github.com/kangax/fabric.js/pull/4005)
+- Fix: properly set options from path fromDatalessObjects [#3995](https://github.com/kangax/fabric.js/pull/3995)
+- Check for slice before action.slice. Avoid conflicts with heavy customized code. [#3992](https://github.com/kangax/fabric.js/pull/3992)
+
+
+**Version 1.7.12**
+
+- Fix: removed possible memleaks from window resize event. [#3984](https://github.com/kangax/fabric.js/pull/3984)
+- Fix: restored default cursor to noTarget only. unselectable objects get the standard hovercursor. [#3953](https://github.com/kangax/fabric.js/pull/3953)
+- Cache fixes: fix uncached pathGroup, removed cache creation at initialize time [#3982](https://github.com/kangax/fabric.js/pull/3982)
+- Improvement: nextTarget to mouseOut and prevTarget to mouseOver [#3900](https://github.com/kangax/fabric.js/pull/3900)
+- Improvement: add isClick boolean to left mouse up [#3898](https://github.com/kangax/fabric.js/pull/3898)
+- Fix: can start selection on top of non selectable object [#3892](https://github.com/kangax/fabric.js/pull/3892)
+- Improvement: better management of right/middle click [#3888](https://github.com/kangax/fabric.js/pull/3888)
+- Fix: subTargetCheck on activeObject/activeGroup was firing too many events [#3909](https://github.com/kangax/fabric.js/pull/3909)
+- Fix: After addWithUpdate or removeWithUpdate object coords must be updated. [#3911](https://github.com/kangax/fabric.js/pull/3911)
+
+
 **Version 1.7.11**
 
 - Hotfix: restore path-groups ability to render [#3877](https://github.com/kangax/fabric.js/pull/3877)

@@ -36,7 +36,7 @@
 						name: 'app.transaction',
 						files: [
 							'./app/transaction/transaction.js',
-							'./app/transaction/mail.service.js'
+							'./app/transaction/transaction.service.js'
 						]
 					});
 				}]

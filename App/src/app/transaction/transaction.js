@@ -5,7 +5,7 @@
 	.controller('TransactionCtrl', TransactionCtrl);
 
 	/** @ngInject */
-	function TransactionCtrl($rootScope, $scope, $state, $sce, firebaseDataRef, $firebaseObject, appUtils, mailService, toaster){
+	function TransactionCtrl($rootScope, $scope, $state, $sce, firebaseDataRef, $firebaseObject, appUtils, transactionService, toaster){
         $rootScope.settings.layout.showSmartphone = false;
         $rootScope.settings.layout.showPageHead = true;
         $rootScope.settings.layout.guestPage = false;
@@ -15,42 +15,36 @@
             return;
         }
         var appSettings = $rootScope.storage.appSettings;
+        console.log('-------appSettings');
+        console.log(appSettings);
         var homeId = appSettings.pageHomeId || '-Kor_iCNGYs-AZewc_I3';
         var vm = this;
-		vm.showInvalid = false;
-
-        $scope.data = {};
-        // $scope
-		$scope.options = {
-            height: 300,
-            toolbar: [
-                    ['edit',['undo','redo']],
-                    ['headline', ['style']],
-                    ['style', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough', 'clear']],
-                    ['fontface', ['fontname']],
-                    ['textsize', ['fontsize']],
-                    ['fontclr', ['color']],
-                    ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
-                    ['height', ['height']],
-                    ['table', ['table']],
-                    ['insert', ['link','picture','video','hr']],
-                    ['view', ['codeview']],
-                    ['mybutton', ['insertMedia']],
-            ],
-            buttons: {
-                insertMedia: $rootScope.editorInsertMedia
-            }
+        vm.showInvalid = false;
+        vm.numberRegx = /^\d+$/;
+        
+        vm.requirementTypes = [{
+            value: '0',
+            text: 'Bitcoin to VCC',
+        },{
+            value: '1',
+            text: 'VCC to Bitcoin',
+        }];
+        vm.model = {
+            requirementType: '',
+            amount: 0,
+            code: ''
         };
 
-        initPage();
-
-        //==========================
-        function initPage(){
-            var ref = firebaseDataRef.child('pages/' + homeId);
-            $firebaseObject(ref).$loaded().then(function(data){
-                $scope.data = data;
-            }); 
-        }
+        
+        vm.groupedItems = [];
+        vm.filteredItems = [];
+        vm.pagedItems = [];
+        vm.paging = {
+            pageSize: 25,
+            currentPage: 0,
+            totalPage: 0,
+            totalRecord: 0
+        };
 
         vm.sendGmailMessage = function(obj) {
             appUtils.showLoading();
@@ -65,7 +59,6 @@
             });
         };
 
-        
 		vm.create = function(form){
 			appUtils.showLoading();
 			// vm.showInvalid = true;
@@ -73,33 +66,75 @@
 				return;
 			}
 
-            mailService.create(vm.mail).then(function(res){
+            transactionService.create(currentUser.$id, vm.model).then(function(res){
                 if(!res.result){				
                     $ngBootbox.alert(res.errorMsg);
                     return;
                 }
-                appUtils.hideLoading();
-
-                var obj = {
-                    to_email: vm.mail.toEmail,
-                    reply_to: vm.mail.replyTo,
-                    from_name: vm.mail.fromName,
-                    to_name: vm.mail.toName,
-                    subject: vm.mail.subject,
-                    message_html: vm.mail.content,
-                    cc: vm.mail.cc,
-                    bcc: vm.mail.bcc
+                
+                var type = _.find(vm.requirementTypes, function(o) { return o.value.toString() === vm.model.requirementType.toString(); });
+                var mail = {
+                    to_email: currentUser.email,
+                    reply_to: '',
+                    // from_name: vm.model.fromName,
+                    // to_name: vm.model.toName,
+                    subject: 'Your transaction',
+                    message_html: 'This is a transaction </br/> type: ' + type.text + ' Amount: ' + vm.model.amount + ' Code: ' + vm.model.code,
+                    cc: appSettings.contacts.adminAdMail,
+                    bcc: ''
                 };
-                vm.sendGmailMessage(obj);
+                vm.sendGmailMessage(mail);
+                vm.searchItems('');
                 toaster.pop('success','Success', "Mail Created.");
-                vm.mail = {};
+                appUtils.hideLoading();
+                vm.model = {};
             }, function(res){
                 $ngBootbox.alert(res.errorMsg);
                 appUtils.hideLoading();
                 return;
             });
 
-		};
+        };
+        
+        vm.groupToPages = function () {
+            vm.pagedItems = [];
+            for (var i = 0; i < vm.filteredItems.length; i++) {
+                if (i % vm.paging.pageSize === 0) {
+                    vm.pagedItems[Math.floor(i / vm.paging.pageSize)] = [vm.filteredItems[i]];
+                } else {
+                    vm.pagedItems[Math.floor(i / vm.paging.pageSize)].push(vm.filteredItems[i]);
+                }
+            }
+            vm.paging.totalPage = Math.ceil(vm.filteredItems.length / vm.paging.pageSize);
+        };
+
+        vm.changePage = function () {
+            vm.groupToPages();
+        };
+        
+        vm.searchItems = function (keyword) {
+            appUtils.showLoading();
+            transactionService.search(currentUser.$id, keyword).then(function (result) {
+                appUtils.hideLoading();
+                vm.filteredItems = appUtils.sortArray(result,'timestampCreated');
+                vm.paging.totalRecord = result.length; 
+                vm.paging.currentPage = 0;
+                //group by pages
+                vm.groupToPages();
+            });
+        };
+
+        vm.displayType = function(value){
+            var type = _.find(vm.requirementTypes, function(o) { return o.value.toString() === value.toString(); });
+            return type.text;
+        };
+
+        initPage();
+
+        // //==========================
+        function initPage(){
+            vm.searchItems('');
+        }
 
 	}
 
