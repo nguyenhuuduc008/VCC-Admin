@@ -27,6 +27,8 @@
             totalRecord: 0
         };
         
+        vm.requirementTypes = appUtils.transactonRequirements;
+        
         /*=============================================================*/
         
         //Functions
@@ -46,6 +48,12 @@
         vm.changePage = function () {
               $('#select-all-item').attr('checked', false);
               vm.groupToPages();
+        };
+        
+        vm.displayType = function(value){
+            var type = _.find(vm.requirementTypes, function(o) { return o.value.toString() === value.toString(); });
+            if(!type) return '';
+            return type.text;
         };
         
         vm.executeSearchItems = function (keyword) {

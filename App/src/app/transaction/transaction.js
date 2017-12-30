@@ -20,15 +20,7 @@
         vm.showInvalid = false;
         vm.numberRegx = /^\d+$/;
         
-        vm.requirementTypes = [{
-                value: '0',
-                text: 'Bitcoin to VCC',
-            }
-            // ,{
-            //     value: '1',
-            //     text: 'VCC to Bitcoin',
-            // }
-        ];
+        vm.requirementTypes = appUtils.transactonRequirements;
         vm.model = {
             requirementType: '',
             amount: 0,

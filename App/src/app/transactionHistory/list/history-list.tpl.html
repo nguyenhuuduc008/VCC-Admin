@@ -4,7 +4,7 @@
             <div class="portlet-input input-inline">
                 <div class="input-icon right">
                     <i class="icon-magnifier" ng-click="vm.executeSearchItems(vm.keyword)"></i>
-                    <input style="width: 280px;" type="text" class="form-control form-control-solid" ng-model="vm.keyword" placeholder="search..." ng-keydown="$event.keyCode === 13 && vm.executeSearchItems(vm.keyword)">
+                    <input style="width: 280px;" type="text" class="form-control form-control-solid" ng-model="vm.keyword" placeholder="search by email" ng-keydown="$event.keyCode === 13 && vm.executeSearchItems(vm.keyword)">
                 </div>
             </div>
         </div>
@@ -41,14 +41,14 @@
                             <span></span>
                         </label>
                     </th>
-                    <th class="width5" class="text-center"> No </th>
+                    <th class="text-center"> No </th>
                     <th> Requirement </th>
                     <th class="text-center"> Code </th>
                     <th class="text-center"> Amount </th>
                     <th class="text-center"> Status </th>
                 </tr>
             </thead>
-        <tbody>
+            <tbody>
                 <tr ng-repeat="item in vm.pagedItems[vm.paging.currentPage]">
                     <td>
                         <label class="mt-checkbox mt-checkbox-outline">
@@ -63,7 +63,6 @@
                     <td class="text-center" ng-if="item.status == 1">Approved</td>
                     <td class="text-center" ng-if="item.status == 0">New</td>
                 </tr>
-            </tbody>
             </tbody>
         </table>
     </div>

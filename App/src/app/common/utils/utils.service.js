@@ -254,6 +254,16 @@
 			{type: 'video/mp4', value: './img/youtube-play.jpg'}
 		];
 
+		var transactonRequirements = [{
+				value: '0',
+				text: 'Bitcoin to VCC',
+			}
+			// ,{
+			//     value: '1',
+			//     text: 'VCC to Bitcoin',
+			// }
+		];
+
 		var utils = {
 			showLoading: showLoading,
 			hideLoading: hideLoading,
@@ -308,7 +318,8 @@
 			mediaIcons: mediaIcons,
 			imgFileIcons: imgFileIcons,
 			videoFileIcons: videoFileIcons,
-			mediaImgSrc: mediaImgSrc
+			mediaImgSrc: mediaImgSrc,
+			transactonRequirements: transactonRequirements
 		};
 		
         function mediaImgSrc(item, imgMaxWidth){
